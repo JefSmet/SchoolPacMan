@@ -6,15 +6,13 @@ using QuestMan.Singleton;
 
 public class GameManager : MonoBehaviourSingletonPersistent<GameManager>
 {
-    // Start is called before the first frame update
-    void Start()
+    public int score;
+
+
+    public void AddScore(int score)
     {
-        
+        this.score += score;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+   
 }

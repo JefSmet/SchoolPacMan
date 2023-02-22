@@ -5,6 +5,16 @@ using QuestMan.Singleton;
 
 public class LevelManager : MonoBehaviourSingleton<LevelManager>
 {
+    public int studiepuntenCount;
+
+
+
+
+
+
+
+
+
     // Start is called before the first frame update
     void Start()
     {

@@ -1,8 +1,9 @@
+using QuestMan.Singleton;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioManager : MonoBehaviour
+public class AudioManager : MonoBehaviourSingletonPersistent<AudioManager>
 {
     // Start is called before the first frame update
     void Start()
