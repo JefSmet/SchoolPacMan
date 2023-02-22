@@ -3,8 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Questman : MonoBehaviour
+namespace QuestMan.Player
 {
-    [SerializeField] FirstPersonController controller;
-    [SerializeField] int heatlh;
+    public class Questman : MonoBehaviour
+    {
+        [SerializeField] FirstPersonController controller;
+        [SerializeField] int heatlh;
+    }
 }
+
