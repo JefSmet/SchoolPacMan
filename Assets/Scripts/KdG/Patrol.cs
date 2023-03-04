@@ -16,7 +16,17 @@ public class Patrol : State
 
     public override void Enter()
     {
-        currentIndex= 0;
+        float lastDistance = Mathf.Infinity;
+        for (int i = 0; i < LevelManager.Instance.CheckPoints.Count; i++)
+        {
+            GameObject thisCheckpoint = LevelManager.Instance.CheckPoints[i];
+            float distance = Vector3.Distance(npc.transform.position, thisCheckpoint.transform.position);
+            if (distance < lastDistance)
+            {
+                currentIndex= i;
+                lastDistance = distance;
+            }
+        }
         if (anim != null)
         {
             anim.SetTrigger("isWalking");
@@ -29,15 +39,15 @@ public class Patrol : State
     {
         if (agent.remainingDistance < 1)
         {
-            if (currentIndex >= LevelManager.Instance.CheckPoints.Count - 1)
-            {
-                currentIndex = 0;
-            }
-            else
-            {
-                currentIndex++;
-            }
-            //currentIndex = (currentIndex + 1) % LevelManager.Instance.CheckPoints.Count;
+            //if (currentIndex >= LevelManager.Instance.CheckPoints.Count - 1)
+            //{
+            //    currentIndex = 0;
+            //}
+            //else
+            //{
+            //    currentIndex++;
+            //}
+            currentIndex = (currentIndex + 1) % LevelManager.Instance.CheckPoints.Count;
             agent.SetDestination(LevelManager.Instance.CheckPoints[currentIndex].transform.position);
         }
         if (CanSeePlayer())
