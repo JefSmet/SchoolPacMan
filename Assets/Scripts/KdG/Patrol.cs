@@ -23,7 +23,7 @@ public class Patrol : State
             float distance = Vector3.Distance(npc.transform.position, thisCheckpoint.transform.position);
             if (distance < lastDistance)
             {
-                currentIndex= i;
+                currentIndex= i-1; // currentIndex get incremented in Update(), so deduct one here
                 lastDistance = distance;
             }
         }
