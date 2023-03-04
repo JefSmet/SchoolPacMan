@@ -66,4 +66,12 @@ public class State
         }
         return this;
     }
+
+    public bool CanSeePlayer()
+    {
+        Vector3 direction = player.transform.forward- npc.transform.position;
+        float angle = Vector3.Angle(direction, npc.transform.forward);
+
+        return (direction.magnitude < visDist && angle < visAngle);        
+    }
 }
