@@ -14,7 +14,8 @@ public class Idle : State
 
     public override void Enter()
     {
-        anim.SetTrigger("isIdle");
+        if (anim != null)
+            anim.SetTrigger("idle");
         base.Enter();
     }
 
@@ -25,12 +26,13 @@ public class Idle : State
             nextState = new Patrol(npc, agent, anim, player);
             stage = EVENT.EXIT;
         }
-        base.Update();
+       
     }
 
     public override void Exit() 
     {
-        anim.ResetTrigger("isIdle");
+        if (anim != null)
+            anim.ResetTrigger("idle");
         base.Exit();
     }
 }

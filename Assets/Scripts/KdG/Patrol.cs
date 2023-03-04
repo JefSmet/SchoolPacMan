@@ -18,7 +18,8 @@ public class Patrol : State
     public override void Enter()
     {
         currentIndex= 0;
-        anim.SetTrigger("isWalking");
+        if (anim!=null)
+        anim.SetTrigger("walk");
         base.Enter();
     }
 
@@ -37,11 +38,12 @@ public class Patrol : State
             currentIndex = (currentIndex + 1) % LevelManager.Instance.CheckPoints.Count;
             agent.SetDestination(LevelManager.Instance.CheckPoints[currentIndex].transform.position);
         }
-        base.Update();
+       
     }
     public override void Exit() 
     {
-        anim.ResetTrigger("isWalking");
+        if (anim != null)
+            anim.ResetTrigger("walk");
         base.Exit();
     }
 }
