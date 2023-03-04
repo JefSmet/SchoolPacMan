@@ -5,25 +5,31 @@ using UnityEngine.AI;
 
 public class Idle : State
 {
-
-    public Idle(GameObject npc, NavMeshAgent agent, Animator anim, Transform player) : base(npc, agent, anim, player)
+    public Idle(GameObject npc, NavMeshAgent agent, Animator anim, Transform player, AudioSource audioSource) : base(npc, agent, anim, player, audioSource)
     {
         name = STATE.IDLE;
     }
 
-
     public override void Enter()
     {
         if (anim != null)
-            anim.SetTrigger("idle");
+        {
+            anim.SetTrigger("isIdle");
+        }
+        agent.isStopped = true;
         base.Enter();
     }
 
     public override void Update() 
     {
-        if (Random.Range(0,100)<10) 
+        if (CanSeePlayer())
         {
-            nextState = new Patrol(npc, agent, anim, player);
+            nextState = new Pursue(npc, agent,anim,player,audioSource);
+            stage = EVENT.EXIT;
+        }
+        else if (Random.Range(0,100)<10) 
+        {
+            nextState = new Patrol(npc, agent, anim, player,audioSource);
             stage = EVENT.EXIT;
         }
        
@@ -32,7 +38,10 @@ public class Idle : State
     public override void Exit() 
     {
         if (anim != null)
-            anim.ResetTrigger("idle");
+        {
+            anim.ResetTrigger("isIdle");
+
+        }
         base.Exit();
     }
 }

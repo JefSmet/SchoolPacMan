@@ -7,7 +7,7 @@ public class State
 {
     public enum STATE
     {
-        IDLE, PURSUE, BOB, PATROL
+        IDLE, PURSUE, BOB, PATROL, ATTACK
     }
 
     public enum EVENT
@@ -22,17 +22,20 @@ public class State
     protected Transform player;
     protected State nextState;
     protected NavMeshAgent agent;
+    protected AudioSource audioSource;
 
-    float visDist = 10f;
-    float visAngle = 30f;
+    float visDist = 10.0f;
+    float visAngle = 30.0f;
+    float attackDistance = 7.0f;
     
-    public State(GameObject npc, NavMeshAgent agent, Animator anim, Transform player)
+    public State(GameObject npc, NavMeshAgent agent, Animator anim, Transform player,AudioSource audioSource)
     {
         this.npc = npc;
         this.anim = anim;
         this.agent = agent;
         this.player = player;
         this.stage = EVENT.ENTER;        
+        this.audioSource = audioSource;
     }
 
 
@@ -51,27 +54,45 @@ public class State
 
     public State Process()
     {
-       switch(stage)
+        switch (stage)
         {
             case EVENT.ENTER:
-                Enter(); 
+                Enter();
                 break;
             case EVENT.UPDATE:
                 Update();
                 break;
             case EVENT.EXIT:
                 Exit();
-                return nextState;                
-                
+                return nextState;
         }
+        //if (stage==EVENT.ENTER) { Enter(); };
+        //if (stage==EVENT.UPDATE) { Update(); };
+        //if (stage==EVENT.EXIT) { Exit(); return nextState; };        
         return this;
     }
 
     public bool CanSeePlayer()
     {
-        Vector3 direction = player.transform.forward- npc.transform.position;
+        Vector3 direction = player.transform.position- npc.transform.position;
         float angle = Vector3.Angle(direction, npc.transform.forward);
 
-        return (direction.magnitude < visDist && angle < visAngle);        
+        //if ((direction.magnitude < visDist) && (angle < visAngle))
+        //{
+        //    return true;
+        //}
+        //return false;
+        return ((direction.magnitude < visDist) && (angle < visAngle));
+    }
+
+    public bool CanAttackPlayer()
+    {
+        Vector3 direction = player.transform.position - npc.transform.position;
+        //if (direction.magnitude < attackDistance)
+        //{
+        //    return true;
+        //}
+        //return false;
+        return direction.magnitude < attackDistance;
     }
 }

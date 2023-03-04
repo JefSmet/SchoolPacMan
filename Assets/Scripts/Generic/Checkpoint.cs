@@ -5,11 +5,11 @@ using UnityEngine;
 public class Checkpoint : MonoBehaviour
 {
 
-    Renderer renderer;
+    Renderer rend;
     // Start is called before the first frame update
     void Start()
     {
-        renderer = GetComponent<Renderer>();
-        renderer.enabled = false;
+        rend = GetComponent<Renderer>();
+        rend.enabled = true;
     }
 }
