@@ -11,7 +11,7 @@ NavMeshProjectSettings:
     cost: 1
   - name: Jump
     cost: 2
-  - name: 
+  - name: Mario
     cost: 1
   - name: 
     cost: 1
@@ -75,7 +75,7 @@ NavMeshProjectSettings:
     agentTypeID: 0
     agentRadius: 0.7
     agentHeight: 1.5
-    agentSlope: 60
+    agentSlope: 20.5
     agentClimb: 0.75
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
