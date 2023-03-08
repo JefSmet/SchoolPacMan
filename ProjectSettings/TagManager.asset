@@ -6,6 +6,7 @@ TagManager:
   tags:
   - CinemachineTarget
   - Checkpoint
+  - AI
   layers:
   - Default
   - TransparentFX
