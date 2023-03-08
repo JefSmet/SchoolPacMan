@@ -1,3 +1,5 @@
+// adapted from packtpub "GAME_DEVELOPMENT_PATTERNS_WITH_UNITY_2021"
+
 using System.Collections;
 using UnityEngine;
 
