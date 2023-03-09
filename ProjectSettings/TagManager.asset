@@ -5,10 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - CinemachineTarget
-  - Checkpoint
   - AI
   - LinkStart
   - LinkEnd
+  - Waypoint
+  - Studiepunt
   layers:
   - Default
   - TransparentFX

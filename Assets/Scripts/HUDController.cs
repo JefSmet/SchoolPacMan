@@ -4,25 +4,25 @@ using UnityEngine;
 using QuestMan.Observer;
 using TMPro;
 
-public class HUDController : Observer
+public class HUDController : MonoBehaviour 
 {
-    ScoreController _scoreController;
-    TextMeshProUGUI _textMeshProUGUI;
-    public override void Notify(Subject subject)
-    {
-        if (!_scoreController)
-            _scoreController =
-            subject.GetComponent<ScoreController>();
-        if (_scoreController)
-        {
-            _textMeshProUGUI.text = "Studiepunten: " + _scoreController.studiepunten;
-        }
-    }
+    
+    [SerializeField] TextMeshProUGUI _studiepuntenText;
+    [SerializeField] TextMeshProUGUI _studiepuntenToGoText;
+
 
     // Start is called before the first frame update
     void Start()
     {
-        _textMeshProUGUI=this.GetComponentInChildren<TextMeshProUGUI>();
-        _textMeshProUGUI.text = "Studiepunten: 0";
+       
+        
+        _studiepuntenText.text = "Studiepunten: 0";
+        _studiepuntenToGoText.text = "Overblijvende Studiepunten: "+LevelManager.Instance.StudieBallenCount.ToString();
+    }
+
+    public void UpdateStudiepunten(int currentStudiepunten)
+    {
+        _studiepuntenText.text = "Studiepunten: " + currentStudiepunten;
+        _studiepuntenToGoText.text = "Overblijvende Studiepunten: " + LevelManager.Instance.StudieBallenCount.ToString();
     }
 }
