@@ -8,7 +8,8 @@ using QuestMan.Observer;
 public class GameManager : MonoBehaviourSingletonPersistent<GameManager>
 {
     public ScoreController scoreController;
-    HUDController hudController;
+    public GameObject hudController;
+    
     public void AddScore(int score)
     {
         scoreController.AddStudiepunten(score);        
@@ -16,13 +17,14 @@ public class GameManager : MonoBehaviourSingletonPersistent<GameManager>
 
     void Start()
     {
+        GameObject.Instantiate(hudController);
         if (Instance.scoreController == null)
         {
             scoreController = gameObject.AddComponent<ScoreController>();
         }
         if (Instance.hudController == null)
         {
-            hudController = GameObject.FindFirstObjectByType<HUDController>();   
+              
         }
     }
 }
