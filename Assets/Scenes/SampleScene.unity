@@ -3818,7 +3818,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1407263630}
   m_Layer: 0
-  m_Name: Level managers
+  m_Name: Level singletons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
