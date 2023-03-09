@@ -12,11 +12,9 @@ public class Studiepunt : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            GameManager.Instance.AddStudiepunten(this);
-            //LevelManager.Instance.RemoveStudiepunt(this);
+            GameManager.Instance.AddStudiepunt(this);       
             
-        }
-        
+        }        
     }
 
     

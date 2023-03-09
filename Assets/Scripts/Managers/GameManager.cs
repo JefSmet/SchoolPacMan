@@ -12,11 +12,12 @@ public class GameManager : MonoBehaviourSingletonPersistent<GameManager>
     private int currentStudiepunten;
     HUDController hudController;
     
-    public void AddStudiepunten(Studiepunt punt)
+    public void AddStudiepunt(Studiepunt punt)
     {
         currentStudiepunten += punt.Value;
-        LevelManager.Instance.Studiepunten.Remove(punt);
-        Destroy(punt.gameObject);
+        LevelManager.Instance.RemoveStudiepunt(punt);
+        //LevelManager.Instance.Studiepunten.Remove(punt);
+        //Destroy(punt.gameObject);
         hudController.UpdateStudiepunten(currentStudiepunten);
     }
 

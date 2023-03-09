@@ -17,12 +17,12 @@ public class HUDController : MonoBehaviour
        
         
         _studiepuntenText.text = "Studiepunten: 0";
-        _studiepuntenToGoText.text = "Overblijvende Studiepunten: "+LevelManager.Instance.StudieBallenCount.ToString();
+        _studiepuntenToGoText.text = "Overblijvende Studiepunten: "+LevelManager.Instance.StudiepuntenValues.ToString();
     }
 
     public void UpdateStudiepunten(int currentStudiepunten)
     {
         _studiepuntenText.text = "Studiepunten: " + currentStudiepunten;
-        _studiepuntenToGoText.text = "Overblijvende Studiepunten: " + LevelManager.Instance.StudieBallenCount.ToString();
+        _studiepuntenToGoText.text = "Overblijvende Studiepunten: " + LevelManager.Instance.StudiepuntenValues.ToString();
     }
 }

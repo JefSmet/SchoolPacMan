@@ -26,14 +26,16 @@ public class LevelManager : MonoBehaviourSingleton<LevelManager>
 
     public void RemoveStudiepunt(Studiepunt studiepunt)
     {
-        if(!studiepunten.Remove(studiepunt))
-            Debug.Log(studiepunt.gameObject.name+" is not removed");
+        studiepunten.Remove(studiepunt);
         Destroy(studiepunt.gameObject);
+        //if (!studiepunten.Remove(studiepunt))
+        //    Debug.Log(studiepunt.gameObject.name + " is not removed");
+        //Destroy(studiepunt.gameObject);
 
     }
 
 
-     void Awake()
+    void Awake()
     {
         Studiepunt[] studiepuntenArray = FindObjectsOfType<Studiepunt>();
         waypoints.AddRange(GameObject.FindGameObjectsWithTag("Waypoint"));
@@ -42,12 +44,6 @@ public class LevelManager : MonoBehaviourSingleton<LevelManager>
             studiepunten.Add(sp,sp.Value) ;
         }
     }
-
-    private void Update()
-    {
-        Debug.Log(Studiepunten.Count);
-    }
-
 
 
 }
