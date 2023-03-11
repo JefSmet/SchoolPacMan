@@ -27,7 +27,7 @@ public class SerialCommThreaded : MonoBehaviour
     static private int databyte_out; //index in txChars array of possible characters to send
     static private bool databyteWrite = false; //to let the serial com thread know there is a byte to send
     //txChars contains the characters to send: we have to use the index
-    private char[] txChars = { 'A', 'D' };
+    private char[] txChars = { 'O', 'I' };
 
     //threadrelated
     private bool stopSerialThread = false; //to stop the thread
@@ -44,29 +44,26 @@ public class SerialCommThreaded : MonoBehaviour
 
     void Update()
     {
-        
-      
-        
-        
-        
         if (databyteRead) //if a databyte is received
         {
             databyteRead = false; //to see if a next databyte is received
             Debug.Log((char)databyte_in);
-        }
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            databyte_out = 0; //index in txChars
-            databyteWrite = true;
+        }        
+    }
 
-        }
-        if (Input.GetKeyDown(KeyCode.D))
+    public void SetLight(bool on)
+    {
+        if (on)
         {
             databyte_out = 1; //index in txChars
             databyteWrite = true;
         }
+        else
+        {
+            databyte_out = 0; //index in txChars
+            databyteWrite = true;
+        }
     }
-
 
     void SerialThread() //separate thread is needed because we need to wait sp.ReadTimeout = 20 ms to see if a byte is received
     {
@@ -82,7 +79,7 @@ public class SerialCommThreaded : MonoBehaviour
                     }
                     if (databyte_out == 1)
                     {
-                        sp.Write(txChars, 1, 1); //tx 'U'
+                        sp.Write(txChars, 1, 1); //tx 'D'
                     }
                     databyteWrite = false; //to be able to send again
                 }
