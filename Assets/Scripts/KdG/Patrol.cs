@@ -10,7 +10,7 @@ public class Patrol : State
     public Patrol(GameObject npc, NavMeshAgent agent, Animator anim, Transform player, AudioSource audioSource) : base(npc, agent, anim, player, audioSource)
     {
         name = STATE.PATROL;
-        agent.speed = 2;
+        agent.speed = 3;
         agent.isStopped = false;
     }
 
@@ -51,7 +51,8 @@ public class Patrol : State
             //    currentIndex++;
             //}
             
-            currentIndex = (currentIndex + 1) % LevelManager.Instance.Waypoints.Count;
+            //currentIndex = (currentIndex + 1) % LevelManager.Instance.Waypoints.Count;
+            currentIndex= Random.Range(0, LevelManager.Instance.Waypoints.Count-1);
             agent.SetDestination(LevelManager.Instance.Waypoints[currentIndex].transform.position);
         }
         if (CanSeePlayer())
