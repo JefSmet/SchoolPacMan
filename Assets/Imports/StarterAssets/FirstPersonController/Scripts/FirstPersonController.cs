@@ -115,7 +115,7 @@ namespace StarterAssets
 		{
 			JumpAndGravity();
 			GroundedCheck();
-			MoveSpeed = (float)Math.Ceiling(GameManager.Instance.ArduinoController.PotValue.Remap(0, 1023, 1, 10));
+			MoveSpeed = Mathf.Round(GameManager.Instance.ArduinoController.PotValue.Remap(0, 1023, 1, 10));
 			SprintSpeed = MoveSpeed * 1.5f;
 			Move();
 
