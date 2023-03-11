@@ -9,15 +9,15 @@ public class GameManager : MonoBehaviourSingletonPersistent<GameManager>
 {
     
     public GameObject hudControllerPrefab;
+    public GameObject arduinoControllerPrefab;
     private int currentStudiepunten;
-    HUDController hudController;
+    public HUDController hudController;
+    SerialCommThreaded arduinoController;
     
     public void AddStudiepunt(Studiepunt punt)
     {
         currentStudiepunten += punt.Value;
-        LevelManager.Instance.RemoveStudiepunt(punt);
-        //LevelManager.Instance.Studiepunten.Remove(punt);
-        //Destroy(punt.gameObject);
+        LevelManager.Instance.RemoveStudiepunt(punt);        
         hudController.UpdateStudiepunten(currentStudiepunten);
     }
 
@@ -25,7 +25,8 @@ public class GameManager : MonoBehaviourSingletonPersistent<GameManager>
     {
         currentStudiepunten = 0;
         hudControllerPrefab = GameObject.Instantiate(hudControllerPrefab);
-        hudController= hudControllerPrefab.GetComponent<HUDController>();
-        
+        arduinoControllerPrefab = GameObject.Instantiate(arduinoControllerPrefab);
+        hudController = hudControllerPrefab.GetComponent<HUDController>();
+        arduinoController=arduinoControllerPrefab.GetComponent<SerialCommThreaded>();
     }
 }

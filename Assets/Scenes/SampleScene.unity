@@ -1017,63 +1017,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4d5c7cbd52ad26c4c8566302dad6224f, type: 3}
---- !u!1001 &639488695
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 7167478532022441044, guid: ce671347ed7669d42a5d08a402fdd743, type: 3}
-      propertyPath: m_RootOrder
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 7167478532022441044, guid: ce671347ed7669d42a5d08a402fdd743, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7167478532022441044, guid: ce671347ed7669d42a5d08a402fdd743, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.6600001
-      objectReference: {fileID: 0}
-    - target: {fileID: 7167478532022441044, guid: ce671347ed7669d42a5d08a402fdd743, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7167478532022441044, guid: ce671347ed7669d42a5d08a402fdd743, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7167478532022441044, guid: ce671347ed7669d42a5d08a402fdd743, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7167478532022441044, guid: ce671347ed7669d42a5d08a402fdd743, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7167478532022441044, guid: ce671347ed7669d42a5d08a402fdd743, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7167478532022441044, guid: ce671347ed7669d42a5d08a402fdd743, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7167478532022441044, guid: ce671347ed7669d42a5d08a402fdd743, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7167478532022441044, guid: ce671347ed7669d42a5d08a402fdd743, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7167478532022441050, guid: ce671347ed7669d42a5d08a402fdd743, type: 3}
-      propertyPath: m_Name
-      value: ArduinoController
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: ce671347ed7669d42a5d08a402fdd743, type: 3}
 --- !u!4 &671549483 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5107485099718359295, guid: b5a85490c717c88408f046479f4e1b8a, type: 3}
@@ -3162,6 +3105,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hudControllerPrefab: {fileID: 2858914435576870427, guid: fedd0e09c3d63e24e9091de06df3ba67, type: 3}
+  arduinoControllerPrefab: {fileID: 7167478532022441050, guid: ce671347ed7669d42a5d08a402fdd743, type: 3}
+  hudController: {fileID: 0}
 --- !u!4 &1802308502
 Transform:
   m_ObjectHideFlags: 0
