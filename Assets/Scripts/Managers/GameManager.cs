@@ -7,13 +7,14 @@ using QuestMan.Observer;
 
 public class GameManager : MonoBehaviourSingletonPersistent<GameManager>
 {
-    public SerialCommThreaded arduinoController;
-    public HUDController hudController;
-    GameObject hudControllerPrefab;
-    GameObject arduinoControllerPrefab;
-    int currentStudiepunten;    
-   
-    
+    SerialCommThreaded arduinoController;
+    HUDController hudController;
+    [SerializeField]GameObject hudControllerPrefab;
+    [SerializeField]GameObject arduinoControllerPrefab;
+    int currentStudiepunten;
+
+    public HUDController HudController{ get=> hudController; }
+    public SerialCommThreaded ArduinoController { get =>arduinoController;}
     public void AddStudiepunt(Studiepunt punt)
     {
         currentStudiepunten += punt.Value;
