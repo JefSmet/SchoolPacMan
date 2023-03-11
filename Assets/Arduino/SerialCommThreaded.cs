@@ -22,7 +22,7 @@ public class SerialCommThreaded : MonoBehaviour
     private bool blnPortcanopen = false; //if portcanopen is true the selected comport is open
 
     //statics to communicate with the serial com thread
-    static public int databyte_in; //read databyte from serial port
+    static private int databyte_in; //read databyte from serial port
     static private bool databyteRead = false; //becomes true if there is indeed a character received
     static private int databyte_out; //index in txChars array of possible characters to send
     static private bool databyteWrite = false; //to let the serial com thread know there is a byte to send
@@ -33,6 +33,8 @@ public class SerialCommThreaded : MonoBehaviour
     private bool stopSerialThread = false; //to stop the thread
     private Thread readWriteSerialThread; //threadvariabele
 
+
+    public int PotValue { get { return databyte_in; } }
 
     void Start()
     {
