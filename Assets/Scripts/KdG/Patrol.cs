@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class Patrol : State
 {
-    int currentIndex = -1;
+    int currentIndex = 0;
 
     public Patrol(GameObject npc, NavMeshAgent agent, Animator anim, Transform player, AudioSource audioSource) : base(npc, agent, anim, player, audioSource)
     {
@@ -23,7 +23,7 @@ public class Patrol : State
             float distance = Vector3.Distance(npc.transform.position, thisCheckpoint.transform.position);
             if (distance < lastDistance)
             {
-                currentIndex= i-1; // currentIndex get incremented in Update(), so deduct one here
+                currentIndex = i - 1; // currentIndex get incremented in Update(), so deduct one here
                 lastDistance = distance;
             }
         }
@@ -37,9 +37,12 @@ public class Patrol : State
 
     public override void Update()
     {
-        if (agent.remainingDistance < 1)
+        
+        
+        if (agent.remainingDistance < 1 && !agent.pathPending)
         {
-            //if (currentIndex >= LevelManager.Instance.CheckPoints.Count - 1)
+
+            //if (currentIndex >= LevelManager.Instance.Waypoints.Count - 1)
             //{
             //    currentIndex = 0;
             //}
@@ -47,6 +50,7 @@ public class Patrol : State
             //{
             //    currentIndex++;
             //}
+            
             currentIndex = (currentIndex + 1) % LevelManager.Instance.Waypoints.Count;
             agent.SetDestination(LevelManager.Instance.Waypoints[currentIndex].transform.position);
         }
