@@ -22,16 +22,17 @@ public class SerialCommThreaded : MonoBehaviour
     private bool blnPortcanopen = false; //if portcanopen is true the selected comport is open
 
     //statics to communicate with the serial com thread
-    static private int databyte_in; //read databyte from serial port
+    static public int databyte_in; //read databyte from serial port
     static private bool databyteRead = false; //becomes true if there is indeed a character received
     static private int databyte_out; //index in txChars array of possible characters to send
     static private bool databyteWrite = false; //to let the serial com thread know there is a byte to send
     //txChars contains the characters to send: we have to use the index
-    private char[] txChars = { 'A', 'U' };
+    private char[] txChars = { 'A', 'D' };
 
     //threadrelated
     private bool stopSerialThread = false; //to stop the thread
     private Thread readWriteSerialThread; //threadvariabele
+
 
     void Start()
     {
@@ -43,6 +44,11 @@ public class SerialCommThreaded : MonoBehaviour
 
     void Update()
     {
+        
+      
+        
+        
+        
         if (databyteRead) //if a databyte is received
         {
             databyteRead = false; //to see if a next databyte is received
@@ -82,7 +88,8 @@ public class SerialCommThreaded : MonoBehaviour
                 }
                 try //trying something to receive takes 20 ms = sp.ReadTimeout
                 {
-                    databyte_in = sp.ReadChar();
+                    //int.TryParse(sp.ReadLine(), out databyte_in);
+                    databyte_in= int.Parse(sp.ReadLine());
                     databyteRead = true;
                 }
                 catch (Exception e)
