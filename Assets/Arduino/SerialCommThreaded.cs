@@ -54,7 +54,7 @@ public class SerialCommThreaded : MonoBehaviour
             databyteWrite = true;
 
         }
-        if (Input.GetKeyDown(KeyCode.U))
+        if (Input.GetKeyDown(KeyCode.D))
         {
             databyte_out = 1; //index in txChars
             databyteWrite = true;
@@ -87,7 +87,7 @@ public class SerialCommThreaded : MonoBehaviour
                 }
                 catch (Exception e)
                 {
-                    Debug.Log(e.Message);
+                    //Debug.Log(e.Message);
                 }
             }
         }
