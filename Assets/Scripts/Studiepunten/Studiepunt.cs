@@ -6,17 +6,18 @@ public class Studiepunt : MonoBehaviour
 {
     [SerializeField] int value;
 
-
+    public int Value { get { return value; } }
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
-            this.gameObject.SetActive(false);
-            GameManager.Instance.AddScore(value);
-        }
-        
+            GameManager.Instance.AddStudiepunt(this);       
+            
+        }        
     }
+
+    
 
 
 }

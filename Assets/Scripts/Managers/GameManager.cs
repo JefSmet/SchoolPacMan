@@ -7,22 +7,25 @@ using QuestMan.Observer;
 
 public class GameManager : MonoBehaviourSingletonPersistent<GameManager>
 {
-    public ScoreController scoreController;
+    
+    public GameObject hudControllerPrefab;
+    private int currentStudiepunten;
     HUDController hudController;
-    public void AddScore(int score)
+    
+    public void AddStudiepunt(Studiepunt punt)
     {
-        scoreController.AddStudiepunten(score);        
+        currentStudiepunten += punt.Value;
+        LevelManager.Instance.RemoveStudiepunt(punt);
+        //LevelManager.Instance.Studiepunten.Remove(punt);
+        //Destroy(punt.gameObject);
+        hudController.UpdateStudiepunten(currentStudiepunten);
     }
 
     void Start()
     {
-        if (Instance.scoreController == null)
-        {
-            scoreController = gameObject.AddComponent<ScoreController>();
-        }
-        if (Instance.hudController == null)
-        {
-            hudController = GameObject.FindFirstObjectByType<HUDController>();   
-        }
+        currentStudiepunten = 0;
+        hudControllerPrefab = GameObject.Instantiate(hudControllerPrefab);
+        hudController= hudControllerPrefab.GetComponent<HUDController>();
+        
     }
 }
