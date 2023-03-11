@@ -77,12 +77,23 @@ public class State
         Vector3 direction = player.transform.position- npc.transform.position;
         float angle = Vector3.Angle(direction, npc.transform.forward);
 
-        //if ((direction.magnitude < visDist) && (angle < visAngle))
-        //{
-        //    return true;
-        //}
-        //return false;
-        return ((direction.magnitude < visDist) && (angle < visAngle));
+
+        if ((direction.magnitude < visDist) && (angle < visAngle))
+        {
+            RaycastHit hit;
+           
+            LayerMask mask = LayerMask.GetMask("Wall");
+
+            // Check if a Wall is hit.
+            if (Physics.Raycast(npc.transform.position, npc.transform.forward, direction.magnitude, mask))
+            {
+                return false;
+            }
+
+            return true;
+        }
+        return false;
+        //return ((direction.magnitude < visDist) && (angle < visAngle));
     }
 
     public bool CanAttackPlayer()

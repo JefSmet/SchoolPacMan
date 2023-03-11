@@ -47,8 +47,7 @@ public class SerialCommThreaded : MonoBehaviour
     {
         if (databyteRead) //if a databyte is received
         {
-            databyteRead = false; //to see if a next databyte is received
-            Debug.Log((char)databyte_in);
+            databyteRead = false; //to see if a next databyte is received            
         }        
     }
 
