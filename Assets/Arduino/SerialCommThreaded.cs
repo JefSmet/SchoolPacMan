@@ -32,7 +32,6 @@ public class SerialCommThreaded : MonoBehaviour
     //threadrelated
     private bool stopSerialThread = false; //to stop the thread
     private Thread readWriteSerialThread; //threadvariabele
-    [SerializeField] float lightDelay=0.05f;
 
     public int PotValue { get { return databyte_in; } }
 
@@ -76,7 +75,7 @@ public class SerialCommThreaded : MonoBehaviour
     {
         SetLight(false);
         SetLight(true);
-        yield return new WaitForSeconds(lightDelay);
+        yield return new WaitForSeconds(0.05f);
         SetLight(false);
     }
     void SerialThread() //separate thread is needed because we need to wait sp.ReadTimeout = 20 ms to see if a byte is received

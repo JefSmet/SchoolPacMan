@@ -1739,7 +1739,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: MoveSpeed
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: JumpHeight
@@ -1747,7 +1747,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: SprintSpeed
-      value: 10
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 8616685848737228371, guid: c5efc39a8aaf6e64ea40e9ad573e9b47, type: 3}
       propertyPath: GroundLayers.m_Bits
@@ -3106,7 +3106,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hudControllerPrefab: {fileID: 2858914435576870427, guid: fedd0e09c3d63e24e9091de06df3ba67, type: 3}
   arduinoControllerPrefab: {fileID: 7167478532022441050, guid: ce671347ed7669d42a5d08a402fdd743, type: 3}
-  hudController: {fileID: 0}
 --- !u!4 &1802308502
 Transform:
   m_ObjectHideFlags: 0
