@@ -17,6 +17,6 @@ public class potTMP : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        textMeshProUGUI.text = SerialCommThreaded.databyte_in.ToString();
+        textMeshProUGUI.text = "potValue: "+ serialCommThreaded.PotValue.ToString();
     }
 }

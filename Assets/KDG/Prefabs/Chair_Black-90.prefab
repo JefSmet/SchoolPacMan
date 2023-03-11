@@ -53,7 +53,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2173500071655789865, guid: 1bca98d9066b457448c4437273a6d929, type: 3}
       propertyPath: m_Name
-      value: Chair_Black
+      value: Chair_Black-90
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: 1bca98d9066b457448c4437273a6d929, type: 3}
