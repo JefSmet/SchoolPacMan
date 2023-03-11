@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 #endif
@@ -114,7 +115,10 @@ namespace StarterAssets
 		{
 			JumpAndGravity();
 			GroundedCheck();
+			MoveSpeed = (float)Math.Ceiling(GameManager.Instance.ArduinoController.PotValue.Remap(0, 1023, 1, 10));
+			SprintSpeed = MoveSpeed * 1.5f;
 			Move();
+
 		}
 
 		private void LateUpdate()

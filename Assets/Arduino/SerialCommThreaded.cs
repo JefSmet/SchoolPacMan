@@ -33,7 +33,7 @@ public class SerialCommThreaded : MonoBehaviour
     private bool stopSerialThread = false; //to stop the thread
     private Thread readWriteSerialThread; //threadvariabele
 
-    public int PotValue { get { return databyte_in; } }
+    public float PotValue { get { return databyte_in; } }
 
     void Start()
     {
