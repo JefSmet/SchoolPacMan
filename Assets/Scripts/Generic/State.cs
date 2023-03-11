@@ -79,11 +79,8 @@ public class State
 
 
         if ((direction.magnitude < visDist) && (angle < visAngle))
-        {
-            RaycastHit hit;
-           
+        {           
             LayerMask mask = LayerMask.GetMask("Wall");
-
             // Check if a Wall is hit.
             if (Physics.Raycast(npc.transform.position, npc.transform.forward, direction.magnitude, mask))
             {
