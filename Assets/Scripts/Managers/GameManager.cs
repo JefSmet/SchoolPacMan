@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using QuestMan;
 using QuestMan.Singleton;
-using QuestMan.Observer;
 
 public class GameManager : MonoBehaviourSingletonPersistent<GameManager>
 {

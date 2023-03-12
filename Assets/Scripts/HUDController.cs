@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using QuestMan.Observer;
 using TMPro;
 
 public class HUDController : MonoBehaviour 
