@@ -12,8 +12,8 @@ public class Studiepunt : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            GameManager.Instance.AddStudiepunt(this);
-            GameManager.Instance.ArduinoController.Blink();
+            //GameManager.Instance.AddStudiepunt(this);
+            //GameManager.Instance.ArduinoController.Blink();
             
         }        
     }

@@ -10,20 +10,20 @@ public class GameManager : MonoBehaviourSingletonPersistent<GameManager>
     HUDController hudController;
     [SerializeField]GameObject hudControllerPrefab;
     [SerializeField]GameObject arduinoControllerPrefab;
-    int currentStudiepunten;
+    int currentStudiepunten = 0;
 
     public HUDController HudController{ get=> hudController; }
     public SerialCommThreaded ArduinoController { get =>arduinoController;}
-    public void AddStudiepunt(Studiepunt punt)
-    {
-        currentStudiepunten += punt.Value;
-        LevelManager.Instance.RemoveStudiepunt(punt);        
-        hudController.UpdateStudiepunten(currentStudiepunten);
-    }
+    //public void AddStudiepunt(Studiepunt punt)
+    //{
+    //    currentStudiepunten += punt.Value;
+    //    LevelManager.Instance.RemoveStudiepunt(punt);        
+    //    hudController.UpdateStudiepunten(currentStudiepunten);
+    //}
 
     void Start()
     {
-        currentStudiepunten = 0;
+        //currentStudiepunten = 0;
         hudControllerPrefab = Instantiate(hudControllerPrefab);
         arduinoControllerPrefab = Instantiate(arduinoControllerPrefab);
         hudController = hudControllerPrefab.GetComponent<HUDController>();

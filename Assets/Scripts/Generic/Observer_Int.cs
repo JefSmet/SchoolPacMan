@@ -1,18 +1,34 @@
+// adapted from unity e-book p. 79-87
+// see: https://resources.unity.com/games/level-up-your-code-with-game-programming-patterns
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Observer_Int : MonoBehaviour
+namespace QuestMan.Observer
 {
-    // Start is called before the first frame update
-    void Start()
+    public class Observer_Int : MonoBehaviour
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        [SerializeField]
+        Subject_Int subjectintToObserve;
+        void OnIntChanged(int value)
+        {
+            // any logic that responds to event goes here
+            Debug.Log("Observer_Int responded. value = "+value);
+        }
+        void Awake()
+        {
+            if (subjectintToObserve != null)
+            {
+                subjectintToObserve.IntChanged += OnIntChanged;
+            }
+        }
+        void OnDestroy()
+        {
+            if (subjectintToObserve != null)
+            {
+                subjectintToObserve.IntChanged -= OnIntChanged;
+            }
+        }
     }
 }

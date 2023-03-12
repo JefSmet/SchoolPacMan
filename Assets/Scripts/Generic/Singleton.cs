@@ -33,23 +33,71 @@ namespace QuestMan.Singleton
         }
     }
 
-
+    // adapted from unity e-book p. 53-60
+    // see: https://resources.unity.com/games/level-up-your-code-with-game-programming-patterns
     public class MonoBehaviourSingletonPersistent<T> : MonoBehaviour
         where T : Component
     {
-        public static T Instance { get; private set; }
-
+        private static T instance;
+        public static T Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = (T)FindObjectOfType(typeof(T));
+                    if (instance == null)
+                    {
+                        SetupInstance();
+                    }
+                }
+                return instance;
+            }
+        }
         public virtual void Awake()
         {
-            if (Instance == null)
+            RemoveDuplicates();
+        }
+        private static void SetupInstance()
+        {
+            instance = (T)FindObjectOfType(typeof(T));
+            if (instance == null)
             {
-                Instance = this as T;
-                DontDestroyOnLoad(this);
+                GameObject gameObj = new GameObject();
+                gameObj.name = typeof(T).Name;
+                instance = gameObj.AddComponent<T>();
+                DontDestroyOnLoad(gameObj);
+            }
+        }
+        private void RemoveDuplicates()
+        {
+            if (instance == null)
+            {
+                instance = this as T;
+                DontDestroyOnLoad(gameObject);
             }
             else
             {
                 Destroy(gameObject);
             }
         }
+        //public class MonoBehaviourSingletonPersistent<T> : MonoBehaviour
+        //    where T : Component
+        //{
+        //    public static T Instance { get; private set; }
+
+        //    public virtual void Awake()
+        //    {
+        //        if (Instance == null)
+        //        {
+        //            Instance = this as T;
+        //            DontDestroyOnLoad(this);
+        //        }
+        //        else
+        //        {
+        //            Destroy(gameObject);
+        //        }
+        //    }
+        //}
     }
 }

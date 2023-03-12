@@ -1,16 +1,22 @@
+// adapted from unity e-book p. 79-87
+// see: https://resources.unity.com/games/level-up-your-code-with-game-programming-patterns
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Subject_Int : MonoBehaviour
+namespace QuestMan.Observer
 {
-    public event Action<int> IntChanged;
-    public void NotifyObservers(int value)
+    public class Subject_Int : MonoBehaviour
     {
-        // "?.": Null-conditional operator
-        // see https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/member-access-operators#null-conditional-operators--and-
-        
-        IntChanged?.Invoke(value);
+        public event Action<int> IntChanged;
+        public void NotifyObservers(int value)
+        {
+            // "?.": Null-conditional operator
+            // see https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/member-access-operators#null-conditional-operators--and-
+
+            IntChanged?.Invoke(value);
+        }
     }
 }
