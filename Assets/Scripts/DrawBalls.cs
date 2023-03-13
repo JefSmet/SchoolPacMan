@@ -31,7 +31,7 @@ public class DrawBalls : MonoBehaviour
         }
         return ballPositions;
     }
-    public void DoDrawBalls()
+    public void CreateBalls()
     {
         List<Vector3> ballPositions = GetBallPositions();
         foreach (Vector3 position in ballPositions)
@@ -84,9 +84,8 @@ public class DrawBalls : MonoBehaviour
         }
     }
 
-    // Start is called before the first frame update
     void Awake()
     {
-        DoDrawBalls();
+        CreateBalls();
     }
 }
