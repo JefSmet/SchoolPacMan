@@ -46,12 +46,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22da7abfb67f34f4aa98b0d7a0c1b144, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startBall: {fileID: 317701599658657773}
-  endBall: {fileID: 317701598077864619}
-  ballPrefab: {fileID: 6776443279086784442, guid: b039281aefeb1814fbe5fff1cf432dbb, type: 3}
-  colliderRadius: 1.5
-  ballCount: 2
-  showCollidergizmo: 0
+  _startBall: {fileID: 317701599658657773}
+  _endBall: {fileID: 317701598077864619}
+  _ballPrefab: {fileID: 6776443279086784442, guid: b039281aefeb1814fbe5fff1cf432dbb, type: 3}
+  _colliderRadius: 1.5
+  _ballCount: 2
+  _showCollidergizmo: 0
 --- !u!1001 &6512891885147080791
 PrefabInstance:
   m_ObjectHideFlags: 0
