@@ -49,7 +49,7 @@ MonoBehaviour:
   startBall: {fileID: 317701599658657773}
   endBall: {fileID: 317701598077864619}
   ballPrefab: {fileID: 6776443279086784442, guid: b039281aefeb1814fbe5fff1cf432dbb, type: 3}
-  colliderRadius: 2
+  colliderRadius: 1.5
   ballCount: 2
   showCollidergizmo: 0
 --- !u!1001 &6512891885147080791

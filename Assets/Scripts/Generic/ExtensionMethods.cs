@@ -10,4 +10,8 @@ public static class ExtensionMethods
         return (value - inputFrom) / (inputTo - inputFrom) * (outputTo - outputFrom) + outputFrom;
     }
 
+    public static int Remap(this int value, int inputFrom, int inputTo, int outputFrom, int outputTo)
+    {
+        return (value - inputFrom) / (inputTo - inputFrom) * (outputTo - outputFrom) + outputFrom;
+    }
 }

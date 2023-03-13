@@ -15,9 +15,12 @@ using System.Collections;
 using System.IO.Ports;
 using System.Threading;
 using System;
+using QuestMan.Observer;
 
-public class SerialCommThreaded : MonoBehaviour
+public class SerialCommThreaded : Subject_Int
 {
+    //Subject_Int potvalueSubject;
+
     public SerialPort sp = new SerialPort("COM3", 9600, Parity.None, 8, StopBits.One);
     private bool blnPortcanopen = false; //if portcanopen is true the selected comport is open
 
@@ -35,8 +38,21 @@ public class SerialCommThreaded : MonoBehaviour
 
     public float PotValue { get { return databyte_in; } }
 
+    int potDiv10 = -1;
+    bool IsPotDiv10Changed()
+    {
+        int curr = Mathf.RoundToInt(databyte_in / 10f);
+        if (potDiv10 != curr)
+        {
+            potDiv10 = curr;
+            return true;
+        }
+        return false;
+    }
+
     void Start()
     {
+        //potvalueSubject = GetComponent<Subject_Int>();
         OpenConnection(); //init COMPort
                           //define thread and start it
         readWriteSerialThread = new Thread(SerialThread);
@@ -47,7 +63,11 @@ public class SerialCommThreaded : MonoBehaviour
     {
         if (databyteRead) //if a databyte is received
         {
-            databyteRead = false; //to see if a next databyte is received            
+            databyteRead = false; //to see if a next databyte is received
+            if (IsPotDiv10Changed())
+            {
+                NotifyObservers(databyte_in);
+            }            
         }        
     }
 
@@ -99,7 +119,7 @@ public class SerialCommThreaded : MonoBehaviour
                 {
                     //int.TryParse(sp.ReadLine(), out databyte_in);
                     databyte_in= int.Parse(sp.ReadLine());
-                    databyteRead = true;
+                    databyteRead = true;                    
                 }
                 catch (Exception e)
                 {

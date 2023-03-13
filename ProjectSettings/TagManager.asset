@@ -8,9 +8,9 @@ TagManager:
   - AI
   - LinkStart
   - LinkEnd
-  - Waypoint
   - Studiepunt
   - Wall
+  - PatrolPoint
   layers:
   - Default
   - TransparentFX

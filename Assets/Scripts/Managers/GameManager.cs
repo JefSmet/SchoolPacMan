@@ -3,30 +3,70 @@ using System.Collections.Generic;
 using UnityEngine;
 using QuestMan;
 using QuestMan.Singleton;
+using StarterAssets;
 
-public class GameManager : MonoBehaviourSingletonPersistent<GameManager>
+public class GameManager : SingletonPersistent<GameManager>
 {
-    SerialCommThreaded arduinoController;
-    HUDController hudController;
-    [SerializeField]GameObject hudControllerPrefab;
-    [SerializeField]GameObject arduinoControllerPrefab;
-    int currentStudiepunten = 0;
-
-    public HUDController HudController{ get=> hudController; }
-    public SerialCommThreaded ArduinoController { get =>arduinoController;}
-    //public void AddStudiepunt(Studiepunt punt)
-    //{
-    //    currentStudiepunten += punt.Value;
-    //    LevelManager.Instance.RemoveStudiepunt(punt);        
-    //    hudController.UpdateStudiepunten(currentStudiepunten);
-    //}
-
-    void Start()
+    [SerializeField]GameObject _hudControllerPrefab;
+    [SerializeField]GameObject _arduinoControllerPrefab;
+    [SerializeField]LevelManager _levelManager;
+    SerialCommThreaded _arduinoController;
+    HUDController _hudController;
+    public int GameScore { get; set; }
+    public HUDController HudController
+    { 
+        get 
+        {  
+            if (_hudController == null)
+            {                
+                if (_hudControllerPrefab == null)
+                {
+                    _hudController = gameObject.AddComponent<HUDController>();
+                }
+                else
+                {
+                    _hudController = _hudControllerPrefab.GetComponent<HUDController>();
+                }
+            }   
+            return _hudController;
+        }
+    }
+    public SerialCommThreaded ArduinoController 
     {
-        //currentStudiepunten = 0;
-        hudControllerPrefab = Instantiate(hudControllerPrefab);
-        arduinoControllerPrefab = Instantiate(arduinoControllerPrefab);
-        hudController = hudControllerPrefab.GetComponent<HUDController>();
-        arduinoController=arduinoControllerPrefab.GetComponent<SerialCommThreaded>();
+        get
+        {
+            if (_arduinoController == null)
+            {
+                if (_arduinoControllerPrefab == null)
+                {
+                    _arduinoController = gameObject.AddComponent<SerialCommThreaded>();
+                }
+                else
+                {
+                    _arduinoController = _arduinoControllerPrefab.GetComponent<SerialCommThreaded>();
+                }
+            }
+            return _arduinoController;
+        }
+    }
+    public LevelManager LevelManager 
+    {
+        get 
+        { 
+            if (_levelManager == null)
+            {
+                _levelManager= gameObject.AddComponent<LevelManager>();
+            }
+            return _levelManager; 
+        } 
+    }
+
+    private void Start()
+    {
+        FirstPersonController fpc = GameObject.FindObjectOfType<FirstPersonController>();
+        if (fpc != null) 
+        {
+            _hudController.SetPlayerSpeedText(fpc.MoveSpeed);
+        }
     }
 }

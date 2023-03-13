@@ -17,10 +17,10 @@ public class Patrol : State
     public override void Enter()
     {
         float lastDistance = Mathf.Infinity;
-        for (int i = 0; i < LevelManager.Instance.Waypoints.Count; i++)
+        for (int i = 0; i < LevelManager.Instance.PatrolPoints.Count; i++)
         {
-            GameObject thisCheckpoint = LevelManager.Instance.Waypoints[i];
-            float distance = Vector3.Distance(npc.transform.position, thisCheckpoint.transform.position);
+            PatrolPoint thisCheckpoint = LevelManager.Instance.PatrolPoints[i];
+            float distance = Vector3.Distance(npc.transform.position, thisCheckpoint.gameObject.transform.position);
             if (distance < lastDistance)
             {
                 currentIndex = i - 1; // currentIndex get incremented in Update(), so deduct one here
@@ -37,23 +37,12 @@ public class Patrol : State
 
     public override void Update()
     {
-        
-        
+        base.Update();        
         if (agent.remainingDistance < 1 && !agent.pathPending)
         {
-
-            //if (currentIndex >= LevelManager.Instance.Waypoints.Count - 1)
-            //{
-            //    currentIndex = 0;
-            //}
-            //else
-            //{
-            //    currentIndex++;
-            //}
-            
             //currentIndex = (currentIndex + 1) % LevelManager.Instance.Waypoints.Count;
-            currentIndex= Random.Range(0, LevelManager.Instance.Waypoints.Count-1);
-            agent.SetDestination(LevelManager.Instance.Waypoints[currentIndex].transform.position);
+            currentIndex= Random.Range(0, LevelManager.Instance.PatrolPoints.Count-1);
+            agent.SetDestination(LevelManager.Instance.PatrolPoints[currentIndex].transform.position);
         }
         if (CanSeePlayer())
         {

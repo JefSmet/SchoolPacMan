@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuestMan.Observer;
+using System;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
@@ -115,8 +116,8 @@ namespace StarterAssets
 		{
 			JumpAndGravity();
 			GroundedCheck();
-			MoveSpeed = Mathf.Round(GameManager.Instance.ArduinoController.PotValue.Remap(0, 1023, 1, 10));
-			SprintSpeed = MoveSpeed * 1.5f;
+			//MoveSpeed = Mathf.Round(GameManager.Instance.ArduinoController.PotValue.Remap(0, 1023, 1, 10));
+			//SprintSpeed = MoveSpeed * 1.5f;
 			Move();
 
 		}
@@ -268,5 +269,5 @@ namespace StarterAssets
 			// when selected, draw a gizmo in the position of, and matching radius of, the grounded collider
 			Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z), GroundedRadius);
 		}
-	}
+    }
 }

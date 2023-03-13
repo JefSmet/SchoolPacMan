@@ -7,15 +7,15 @@ using UnityEngine;
 
 namespace QuestMan.Observer
 {
-    public class Observer_Int : MonoBehaviour
+    public abstract class Observer_Int : MonoBehaviour
     {
         [SerializeField]
         Subject_Int subjectintToObserve;
-        void OnIntChanged(int value)
-        {
-            // any logic that responds to event goes here
-            Debug.Log("Observer_Int responded. value = "+value);
-        }
+        public abstract void OnIntChanged(int value);
+        //{
+        //    // any logic that responds to event goes here
+        //    Debug.Log("Observer_Int responded. value = "+value);
+        //}
         void Awake()
         {
             if (subjectintToObserve != null)

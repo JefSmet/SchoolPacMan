@@ -3,42 +3,41 @@ using System.Collections.Generic;
 using UnityEngine;
 using QuestMan.Singleton;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
+using System.Linq;
 
-public class LevelManager : MonoBehaviourSingleton<LevelManager>
+public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
 {
-    private List<GameObject> waypoints = new List<GameObject>();
-    private Dictionary<Studiepunt,int> studiepunten = new Dictionary<Studiepunt,int>();
-    private int total;
-    public List<GameObject> Waypoints{get { return waypoints; }}
-    //public Dictionary<Studiepunt,int> Studiepunten { get { return studiepunten;} }
-    public int StudiepuntenValues {
-        get 
-        { 
-            int total= 0;
-            foreach(int values in studiepunten.Values)
-            {
-                total+= values;
-            }
-            return total ; 
-        } 
-    }
-    public int StudieBallenCount { get { return studiepunten.Count; } }
+    List<PatrolPoint> _patrolpoints = new List<PatrolPoint>();
+    List<Studiepunt> _studiepunten = new List<Studiepunt>();
+    public List<PatrolPoint> PatrolPoints { get { return _patrolpoints; } }
+    public List<Studiepunt> Studiepunten { get { return _studiepunten;} }
+    public int LevelScore { get; set; }
 
-    public void RemoveStudiepunt(Studiepunt studiepunt)
+    public void StudiepuntPickedUp(Studiepunt sp)
     {
-        studiepunten.Remove(studiepunt);
-        Destroy(studiepunt.gameObject);
-    }
-
-
-    void Awake()
-    {
-        Studiepunt[] studiepuntenArray = FindObjectsOfType<Studiepunt>();
-        waypoints.AddRange(GameObject.FindGameObjectsWithTag("Waypoint"));
-        foreach (Studiepunt sp in studiepuntenArray)
+       int i = _studiepunten.IndexOf(sp);
+        if (i > -1)
         {
-            studiepunten.Add(sp,sp.Value) ;
-        }
+            _studiepunten[i].gameObject.SetActive(false);
+            LevelScore += sp.Value;
+            GameManager.Instance.GameScore += sp.Value;
+            GameManager.Instance.HudController.SetSPText(LevelScore);
+            GameManager.Instance.HudController.SetBallsToGoText(GetActiveStudiepunten());
+            GameManager.Instance.ArduinoController.Blink();
+        }        
+    }
+
+    int GetActiveStudiepunten()
+    {
+        return _studiepunten.Where(sp => sp.gameObject.activeInHierarchy).Count();
+    }
+
+    void Start()
+    {        
+        _patrolpoints.AddRange(FindObjectsOfType<PatrolPoint>());
+        _studiepunten.AddRange(FindObjectsOfType<Studiepunt>());
+        GameManager.Instance.HudController.SetBallsToGoText(GetActiveStudiepunten());
     }
 
 
