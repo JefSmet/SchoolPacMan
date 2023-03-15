@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: 6372afa93fb0a6048af1ffcdf0760e72
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: dda12f74ff9116a42b23482252b2c482, type: 3}
+  _instancesCopy:
+  - {fileID: 11400000, guid: 8164121780a95464e9542710c8e6ef5c, type: 2}
+  _fileAsset: {instanceID: 0}
+  _assetPath: Assets/Materials/concrete_tiles_002_bitmap.sbsar
