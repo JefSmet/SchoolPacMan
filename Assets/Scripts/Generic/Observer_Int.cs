@@ -7,27 +7,23 @@ using UnityEngine;
 
 namespace QuestMan.Observer
 {
-    public abstract class Observer_Int : MonoBehaviour
+    public abstract class Observer<T> : MonoBehaviour
     {
-        [SerializeField]
-        Subject_Int subjectintToObserve;
-        public abstract void OnIntChanged(int value);
-        //{
-        //    // any logic that responds to event goes here
-        //    Debug.Log("Observer_Int responded. value = "+value);
-        //}
+        [SerializeField] Subject<T> subjectToObserve;
+        public abstract void OnSubjectChanged(T value);
+        
         void Awake()
         {
-            if (subjectintToObserve != null)
+            if (subjectToObserve != null)
             {
-                subjectintToObserve.IntChanged += OnIntChanged;
+                subjectToObserve.SubjectChanged += OnSubjectChanged;
             }
         }
         void OnDestroy()
         {
-            if (subjectintToObserve != null)
+            if (subjectToObserve != null)
             {
-                subjectintToObserve.IntChanged -= OnIntChanged;
+                subjectToObserve.SubjectChanged -= OnSubjectChanged;
             }
         }
     }

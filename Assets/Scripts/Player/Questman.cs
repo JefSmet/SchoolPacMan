@@ -6,12 +6,12 @@ using UnityEngine;
 
 namespace QuestMan.Player
 {
-    public class Questman : Observer_Int    
+    public class Questman : Observer<int>    
     {
         [SerializeField] FirstPersonController controller;
         [SerializeField] int heatlh;
 
-        public override void OnIntChanged(int value)
+        public override void OnSubjectChanged(int value)
         {
             float ms = value;
             ms = ms.Remap(0, 1023, 1, 10);

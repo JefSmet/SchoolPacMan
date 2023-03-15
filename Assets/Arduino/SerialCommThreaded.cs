@@ -17,10 +17,8 @@ using System.Threading;
 using System;
 using QuestMan.Observer;
 
-public class SerialCommThreaded : Subject_Int
+public class SerialCommThreaded : Subject<int>
 {
-    //Subject_Int potvalueSubject;
-
     public SerialPort sp = new SerialPort("COM3", 9600, Parity.None, 8, StopBits.One);
     private bool blnPortcanopen = false; //if portcanopen is true the selected comport is open
 
@@ -51,8 +49,7 @@ public class SerialCommThreaded : Subject_Int
     }
 
     void Start()
-    {
-        //potvalueSubject = GetComponent<Subject_Int>();
+    {        
         OpenConnection(); //init COMPort
                           //define thread and start it
         readWriteSerialThread = new Thread(SerialThread);

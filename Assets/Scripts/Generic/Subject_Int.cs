@@ -8,15 +8,28 @@ using UnityEngine;
 
 namespace QuestMan.Observer
 {
-    public class Subject_Int : MonoBehaviour
+    //public class Subject : MonoBehaviour
+    //{
+    //    public event Action<int> IntChanged;
+    //    public void NotifyObservers(int value)
+    //    {
+    //        // "?.": Null-conditional operator
+    //        // see https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/member-access-operators#null-conditional-operators--and-
+
+    //        IntChanged?.Invoke(value);
+    //    }
+    //}
+
+    public class Subject<T>: MonoBehaviour
     {
-        public event Action<int> IntChanged;
-        public void NotifyObservers(int value)
+        public event Action<T> SubjectChanged;
+
+        public void NotifyObservers(T value)
         {
             // "?.": Null-conditional operator
             // see https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/operators/member-access-operators#null-conditional-operators--and-
 
-            IntChanged?.Invoke(value);
+            SubjectChanged?.Invoke(value);
         }
     }
 }
