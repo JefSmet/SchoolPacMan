@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class Studiepunt : MonoBehaviour
 {
-    [SerializeField] int value;
+    [SerializeField] int _value = 5;
 
-    public int Value { get { return value; } }
+    public int Value
+    {
+        get { return _value; }
+        set => _value = value;
+    }
 
     private void OnTriggerEnter(Collider other)
     {

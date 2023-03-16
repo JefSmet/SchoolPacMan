@@ -19,6 +19,9 @@ using QuestMan.Observer;
 
 public class SerialCommThreaded : Subject<int>
 {
+    public Subject<int> subjectPotentioValue;
+    public Subject<bool> subjectButtonClicked;
+
     public SerialPort sp = new SerialPort("COM3", 9600, Parity.None, 8, StopBits.One);
     private bool blnPortcanopen = false; //if portcanopen is true the selected comport is open
 
@@ -28,7 +31,7 @@ public class SerialCommThreaded : Subject<int>
     static private int databyte_out; //index in txChars array of possible characters to send
     static private bool databyteWrite = false; //to let the serial com thread know there is a byte to send
     //txChars contains the characters to send: we have to use the index
-    private char[] txChars = { 'O', 'I' };
+    private char[] txChars = { 'O', 'I', 'U', 'A', 'B'}; 
 
     //threadrelated
     private bool stopSerialThread = false; //to stop the thread
@@ -63,8 +66,9 @@ public class SerialCommThreaded : Subject<int>
             databyteRead = false; //to see if a next databyte is received
             if (IsPotDiv10Changed())
             {
-                NotifyObservers(databyte_in);
-            }            
+                subjectPotentioValue.NotifyObservers(databyte_in);
+            } 
+            Debug.Log("Arduino databyte_in: "+databyte_in.ToString());
         }        
     }
 
