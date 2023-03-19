@@ -3,7 +3,10 @@ guid: 4fadb895e8d7a204192dc798ed3811c3
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - _hudControllerPrefab: {fileID: 7162136578178145379, guid: fedd0e09c3d63e24e9091de06df3ba67, type: 3}
+  - _arduinoControllerPrefab: {fileID: 6876324847165971195, guid: ce671347ed7669d42a5d08a402fdd743, type: 3}
+  - _levelManager: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
