@@ -76,7 +76,26 @@ namespace StarterAssets
 
 		private const float _threshold = 0.01f;
 
-		private bool IsCurrentDeviceMouse
+		void PotentioValueChanged(int value)
+		{
+			float speed = value;
+			speed = speed.Remap(0, 1023, 1, 10);
+			MoveSpeed = speed;
+			SprintSpeed= speed*1.5f;
+			GameManager.Instance.HudController.SetPlayerSpeedText(speed);
+		}
+
+        private void OnEnable()
+        {
+			SerialCommThreaded.onPotentioValueChanged += PotentioValueChanged;
+        }
+
+        private void OnDisable()
+        {
+            SerialCommThreaded.onPotentioValueChanged -= PotentioValueChanged;
+        }
+
+        private bool IsCurrentDeviceMouse
 		{
 			get
 			{

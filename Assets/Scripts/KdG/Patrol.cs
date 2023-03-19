@@ -19,7 +19,7 @@ public class Patrol : State
         float lastDistance = Mathf.Infinity;
         for (int i = 0; i < LevelManager.Instance.PatrolPoints.Count; i++)
         {
-            PatrolPoint thisCheckpoint = LevelManager.Instance.PatrolPoints[i];
+            DisableRenderer thisCheckpoint = LevelManager.Instance.PatrolPoints[i];
             float distance = Vector3.Distance(npc.transform.position, thisCheckpoint.gameObject.transform.position);
             if (distance < lastDistance)
             {

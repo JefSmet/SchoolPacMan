@@ -7,25 +7,33 @@ namespace QuestMan.Singleton
     public class Singleton<T> : MonoBehaviour
         where T : Component
     {
+        static readonly object Instancelock = new object();
         static T _instance;
         public static T Instance
-        {
+        {   // Double checked locking approach for Thread-safe Singleton Design Pattern in C#.
+            // see: https://dotnettutorials.net/lesson/thread-safe-singleton-design-pattern/
             get
             {
                 if (_instance == null)
                 {
-                    var objs = FindObjectsOfType(typeof(T)) as T[];
-                    if (objs.Length > 0)
-                        _instance = objs[0];
-                    if (objs.Length > 1)
+                    lock (Instancelock)
                     {
-                        Debug.LogError("There is more than one " + typeof(T).Name + " in the scene.");
-                    }
-                    if (_instance == null)
-                    {
-                        GameObject obj = new GameObject();
-                        obj.hideFlags = HideFlags.HideAndDontSave;
-                        _instance = obj.AddComponent<T>();
+                        if (_instance == null)
+                        {
+                            var objs = FindObjectsOfType(typeof(T)) as T[];
+                            if (objs.Length > 0)
+                                _instance = objs[0];
+                            if (objs.Length > 1)
+                            {
+                                Debug.LogError("There is more than one " + typeof(T).Name + " in the scene.");
+                            }
+                            if (_instance == null)
+                            {
+                                GameObject obj = new GameObject();
+                                obj.hideFlags = HideFlags.HideAndDontSave;
+                                _instance = obj.AddComponent<T>();
+                            }
+                        }
                     }
                 }
                 return _instance;
@@ -38,6 +46,7 @@ namespace QuestMan.Singleton
     public class SingletonPersistent<T> : MonoBehaviour
         where T : Component
     {
+        static readonly object Instancelock = new object();
         static T _instance;
         public static T Instance
         {
@@ -45,10 +54,16 @@ namespace QuestMan.Singleton
             {
                 if (_instance == null)
                 {
-                    _instance = (T)FindObjectOfType(typeof(T));
-                    if (_instance == null)
+                    lock (Instancelock)
                     {
-                        SetupInstance();
+                        if (_instance == null)
+                        {
+                            _instance = (T)FindObjectOfType(typeof(T));
+                            if (_instance == null)
+                            {
+                                SetupInstance();
+                            }
+                        }
                     }
                 }
                 return _instance;
@@ -72,14 +87,17 @@ namespace QuestMan.Singleton
         }
         void RemoveDuplicates()
         {
-            if (_instance == null)
+            lock (Instancelock)
             {
-                _instance = this as T;
-                DontDestroyOnLoad(gameObject);
-            }
-            else
-            {
-                Destroy(gameObject);
+                if (_instance == null)
+                {
+                    _instance = this as T;
+                    DontDestroyOnLoad(gameObject);
+                }
+                else
+                {
+                    Destroy(gameObject);
+                }
             }
         }
     }

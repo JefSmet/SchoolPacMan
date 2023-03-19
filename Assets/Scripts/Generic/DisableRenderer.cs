@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PatrolPoint : MonoBehaviour
+public class DisableRenderer : MonoBehaviour
 {
 
     Renderer rend;
@@ -10,6 +10,6 @@ public class PatrolPoint : MonoBehaviour
     void Start()
     {
         rend = GetComponent<Renderer>();
-        rend.enabled = true;
+        rend.enabled = false;
     }
 }

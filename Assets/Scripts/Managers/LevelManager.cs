@@ -15,9 +15,9 @@ public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
     [SerializeField] Color superballColor = Color.red;
     [SerializeField] float percentageSuperballs = 20f;
     
-    List<PatrolPoint> _patrolpoints = new List<PatrolPoint>();
+    List<DisableRenderer> _patrolpoints = new List<DisableRenderer>();
     List<Studiepunt> _studiepunten = new List<Studiepunt>();
-    public List<PatrolPoint> PatrolPoints { get { return _patrolpoints; } }
+    public List<DisableRenderer> PatrolPoints { get { return _patrolpoints; } }
     public List<Studiepunt> Studiepunten { get { return _studiepunten;} }
     public int LevelScore { get; set; }
 
@@ -27,12 +27,22 @@ public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
        // if (i > -1)
        // {
             //_studiepunten[i].gameObject.SetActive(false);
+
             sp.gameObject.SetActive(false);
             LevelScore += sp.Value;
             GameManager.Instance.GameScore += sp.Value;
             GameManager.Instance.HudController.SetSPText(LevelScore);
             GameManager.Instance.HudController.SetBallsToGoText(GetActiveStudiepunten());
-            GameManager.Instance.ArduinoController.Blink();
+            ArduinoLight light;
+            if (sp.Value == ballValue)
+            {
+                light = ArduinoLight.GreenLight;
+            }
+            else
+            {
+                light = ArduinoLight.RedLight;
+            }
+            GameManager.Instance.ArduinoController.Blink(light);
         //}        
     }
 
@@ -73,7 +83,7 @@ public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
 
     void Start()
     {        
-        _patrolpoints.AddRange(FindObjectsOfType<PatrolPoint>());
+        _patrolpoints.AddRange(FindObjectsOfType<DisableRenderer>());
         _studiepunten.AddRange(FindObjectsOfType<Studiepunt>());
         GameManager.Instance.HudController.SetBallsToGoText(GetActiveStudiepunten());
         InitializeBalls();
