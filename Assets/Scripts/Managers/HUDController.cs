@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
-using QuestMan.Observer;
 
 public class HUDController : MonoBehaviour 
 {

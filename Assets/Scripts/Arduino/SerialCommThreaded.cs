@@ -15,8 +15,6 @@ using System.Collections;
 using System.IO.Ports;
 using System.Threading;
 using System;
-using QuestMan.Observer;
-using Unity.VisualScripting.Antlr3.Runtime;
 
 public enum ArduinoLight
 {
