@@ -14,13 +14,15 @@ public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
     private Transform aiSpawn;
     private Transform playerSpawn;
 
-    float radius=1f;
+    float radius = 1f;
 
     List<GameObject> _patrolpoints = new List<GameObject>();
     List<Studiepunt> _studiepunten = new List<Studiepunt>();
-    List<GameObject> agents= new List<GameObject>();
+    List<GameObject> agents = new List<GameObject>();
+    private GameObject player;
+
     public List<GameObject> PatrolPoints { get { return _patrolpoints; } }
-    public List<Studiepunt> Studiepunten { get { return _studiepunten;} }
+    public List<Studiepunt> Studiepunten { get { return _studiepunten; } }
     public int LevelScore { get; set; }
     void Start()
     {
@@ -33,19 +35,41 @@ public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
         GameManager.Instance.HudController.SetSPText(0);
         GameManager.Instance.HudController.SetBallsToGoText(GetActiveStudiepunten());
         GameManager.Instance.HudController.SetLivesText(3);
-        GameObject.FindGameObjectWithTag("Player").transform.position=playerSpawn.position;
         agents.AddRange(GameObject.FindGameObjectsWithTag("AI"));
-        foreach (GameObject agent in agents)
-        {
-            Vector3 position = aiSpawn.position + Random.insideUnitSphere * radius;
-            position.y= 3.373623e-05f;
-            agent.GetComponent<NavMeshAgent>().enabled= false;
-            agent.transform.position = position;
-            agent.GetComponent<NavMeshAgent>().enabled = true;
-            //agent.transform.position= aiSpawn.position;
-        }
+        player = GameObject.FindGameObjectWithTag("Player");
+        RespawnPlayer();
+        RespawnAgents();
+
+    }
+
+
+    public void Die()
+    {
+        GameManager.Instance.Lives -= 1;
+        RespawnPlayer();
+        RespawnAgents();
+       
+    }
+
+    private void RespawnPlayer()
+    {
+        Debug.Log("Player Respawned");
+        player.transform.position = playerSpawn.position;
         
     }
+
+    private void RespawnAgents()
+    {
+
+        foreach (GameObject agent in agents)
+        {
+            NavMeshAgent nma = agent.GetComponent<NavMeshAgent>();
+            nma.enabled = false;
+            agent.transform.position = aiSpawn.position;
+            nma.enabled = true;
+        }
+    }
+
     private void OnEnable()
     {
         SerialCommThreaded.onButtonPressed += SwitchBalls;
@@ -58,31 +82,24 @@ public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
 
     public void StudiepuntPickedUp(Studiepunt sp)
     {
-            sp.gameObject.SetActive(false);
-            LevelScore += sp.Value;
-            GameManager.Instance.GameScore += sp.Value;
-            GameManager.Instance.HudController.SetSPText(LevelScore);
-            GameManager.Instance.HudController.SetBallsToGoText(GetActiveStudiepunten());         
-            GameManager.Instance.ArduinoController.Blink(GetStudiepuntLight(sp));
-        if (GetActiveStudiepunten()==0)
+        sp.gameObject.SetActive(false);
+        LevelScore += sp.Value;
+        GameManager.Instance.GameScore += sp.Value;
+        GameManager.Instance.HudController.SetSPText(LevelScore);
+        GameManager.Instance.HudController.SetBallsToGoText(GetActiveStudiepunten());
+        GameManager.Instance.ArduinoController.Blink(GetStudiepuntLight(sp));
+        if (GetActiveStudiepunten() == 0)
         {
             GameManager.Instance.LoadNextLevel();
         }
     }
 
-    
-
-
-    //void ArduinoButtonPressed()
-    //{
-    //    SwitchBalls();
-    //}
 
     private void SwitchBalls()
     {
         foreach (Studiepunt sp in _studiepunten.Where(sp => sp.gameObject.activeInHierarchy))
         {
-            if (sp.Value==ballValue)
+            if (sp.Value == ballValue)
             {
                 ChangeBallValueColor(sp, superballValue, superballColor);
             }
@@ -117,12 +134,12 @@ public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
 
     void RandomizeSuperballs()
     {
-         int superballCount = Mathf.RoundToInt( percentageSuperballs / 100 * _studiepunten.Count() );
+        int superballCount = Mathf.RoundToInt(percentageSuperballs / 100 * _studiepunten.Count());
 
         for (int i = 0; i < superballCount; i++)
         {
-            int index = Random.Range(0,_studiepunten.Count());
-            while (_studiepunten[index].Value==superballValue)
+            int index = Random.Range(0, _studiepunten.Count());
+            while (_studiepunten[index].Value == superballValue)
             {
                 index = Random.Range(0, _studiepunten.Count());
             }
@@ -130,7 +147,7 @@ public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
         }
     }
 
-    void ChangeBallValueColor(Studiepunt studiepunt, int value , Color color)
+    void ChangeBallValueColor(Studiepunt studiepunt, int value, Color color)
     {
         studiepunt.Value = value;
         Renderer rend = studiepunt.GetComponent<Renderer>();

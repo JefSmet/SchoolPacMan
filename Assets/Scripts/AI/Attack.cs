@@ -34,11 +34,17 @@ public class Attack : State
         direction.y = 0;
 
         npc.transform.rotation = Quaternion.Slerp(npc.transform.rotation,Quaternion.LookRotation(direction), Time.deltaTime*rotationSpeed);
+        
 
         if (!CanAttackPlayer())
         {
             nextState = new Idle (npc, agent, anim, player,audioSource);
             stage = EVENT.EXIT;
+            
+        }
+        else
+        {
+            LevelManager.Instance.Die();
         }
     }
     public override void Exit() 
