@@ -159,7 +159,7 @@ public class SerialCommThreaded : MonoBehaviour
                 catch (Exception e)
                 {
                     databyteRead = false;
-                    Debug.Log("Arduino-error: "+e.Message);
+                    //Debug.Log("Arduino-error: "+e.Message);
                 }
             }
         }

@@ -9,7 +9,8 @@ public class AI : MonoBehaviour
     Animator animator;
     public Transform player;
     State currentState;
-    AudioSource audioSource;
+    AudioSource audioSource; 
+    //bool arduinoButtonPressed = false;
 
     // Start is called before the first frame update
     void Start()
@@ -17,7 +18,7 @@ public class AI : MonoBehaviour
         agent= GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         audioSource= GetComponent<AudioSource>();
-        currentState = new Idle(gameObject, agent, animator, player,audioSource);
+        currentState = new Idle(gameObject, agent, animator, player, audioSource);
     }
 
     // Update is called once per frame

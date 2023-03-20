@@ -8,7 +8,7 @@ public class HUDController : MonoBehaviour
     
     [SerializeField] TextMeshProUGUI _spText;
     [SerializeField] TextMeshProUGUI _ballsToGoText;
-    [SerializeField] TextMeshProUGUI _playerSpeedText;
+    [SerializeField] TextMeshProUGUI _playerSpeedText;    
 
     [SerializeField] string captionSP = "Studiepunten: ";
     [SerializeField] string captionBallsToGo = "StudieBallen te gaan: ";
@@ -36,8 +36,4 @@ public class HUDController : MonoBehaviour
         SetBallsToGoText(LevelManager.Instance.Studiepunten.Count);
     }
 
-    void PotentioChanged(int value)
-    {
-        SetPlayerSpeedText(value);
-    }
 }

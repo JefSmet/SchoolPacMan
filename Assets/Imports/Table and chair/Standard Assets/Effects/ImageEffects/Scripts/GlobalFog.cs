@@ -48,7 +48,7 @@ namespace UnityStandardAssets.ImageEffects
             }
 
 			Camera cam = GetComponent<Camera>();
-			Transform camtr = cam.transform;
+            UnityEngine.Transform camtr = cam.transform;
 			float camNear = cam.nearClipPlane;
 			float camFar = cam.farClipPlane;
 			float camFov = cam.fieldOfView;

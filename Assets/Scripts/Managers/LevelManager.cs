@@ -1,9 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using QuestMan.Singleton;
-using System.Runtime.CompilerServices;
-using Unity.VisualScripting;
 using System.Linq;
 
 public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
@@ -14,36 +10,60 @@ public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
     [SerializeField] int superballValue = 10;
     [SerializeField] Color superballColor = Color.red;
     [SerializeField] float percentageSuperballs = 20f;
-    
-    List<DisableRenderer> _patrolpoints = new List<DisableRenderer>();
+
+    List<GameObject> _patrolpoints = new List<GameObject>();
     List<Studiepunt> _studiepunten = new List<Studiepunt>();
-    public List<DisableRenderer> PatrolPoints { get { return _patrolpoints; } }
+    public List<GameObject> PatrolPoints { get { return _patrolpoints; } }
     public List<Studiepunt> Studiepunten { get { return _studiepunten;} }
     public int LevelScore { get; set; }
 
     public void StudiepuntPickedUp(Studiepunt sp)
     {
-       //int i = _studiepunten.IndexOf(sp);
-       // if (i > -1)
-       // {
-            //_studiepunten[i].gameObject.SetActive(false);
-
             sp.gameObject.SetActive(false);
             LevelScore += sp.Value;
             GameManager.Instance.GameScore += sp.Value;
             GameManager.Instance.HudController.SetSPText(LevelScore);
-            GameManager.Instance.HudController.SetBallsToGoText(GetActiveStudiepunten());
-            ArduinoLight light;
-            if (sp.Value == ballValue)
+            GameManager.Instance.HudController.SetBallsToGoText(GetActiveStudiepunten());         
+            GameManager.Instance.ArduinoController.Blink(GetStudiepuntLight(sp));       
+    }
+
+    private void OnEnable()
+    {
+        SerialCommThreaded.onButtonPressed += ArduinoButtonPressed;
+    }
+
+    private void OnDisable()
+    {
+        SerialCommThreaded.onButtonPressed -= ArduinoButtonPressed;
+    }
+
+    void ArduinoButtonPressed()
+    {
+        SwitchBalls();
+    }
+
+    private void SwitchBalls()
+    {
+        foreach (Studiepunt sp in _studiepunten.Where(sp => sp.gameObject.activeInHierarchy))
+        {
+            if (sp.Value==ballValue)
             {
-                light = ArduinoLight.GreenLight;
+                ChangeBallValueColor(sp, superballValue, superballColor);
             }
             else
             {
-                light = ArduinoLight.RedLight;
+                ChangeBallValueColor(sp, ballValue, ballColor);
             }
-            GameManager.Instance.ArduinoController.Blink(light);
-        //}        
+        }
+    }
+
+    ArduinoLight GetStudiepuntLight(Studiepunt sp)
+    {
+        if (sp.Value == ballValue)
+        {
+            return ArduinoLight.GreenLight;
+        }
+        return ArduinoLight.RedLight;
     }
 
     int GetActiveStudiepunten()
@@ -83,7 +103,7 @@ public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
 
     void Start()
     {        
-        _patrolpoints.AddRange(FindObjectsOfType<DisableRenderer>());
+        _patrolpoints.AddRange(GameObject.FindGameObjectsWithTag("PatrolPoint"));
         _studiepunten.AddRange(FindObjectsOfType<Studiepunt>());
         GameManager.Instance.HudController.SetBallsToGoText(GetActiveStudiepunten());
         InitializeBalls();

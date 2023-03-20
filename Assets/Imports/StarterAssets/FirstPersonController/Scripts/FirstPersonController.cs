@@ -75,7 +75,7 @@ namespace StarterAssets
 
 		private const float _threshold = 0.01f;
 
-		void PotentioValueChanged(int value)
+		void ArduinoPotentioValueChanged(int value)
 		{
 			float speed = value;
 			speed = speed.Remap(0, 1023, 1, 10);
@@ -86,12 +86,12 @@ namespace StarterAssets
 
         private void OnEnable()
         {
-			SerialCommThreaded.onPotentioValueChanged += PotentioValueChanged;
+			SerialCommThreaded.onPotentioValueChanged += ArduinoPotentioValueChanged;
         }
 
         private void OnDisable()
         {
-            SerialCommThreaded.onPotentioValueChanged -= PotentioValueChanged;
+            SerialCommThreaded.onPotentioValueChanged -= ArduinoPotentioValueChanged;
         }
 
         private bool IsCurrentDeviceMouse

@@ -153,7 +153,7 @@ namespace UnityStandardAssets.CinematicEffects
         [Range(0.01f, 1.0f)]
         public float textureBokehSpawnHeuristic = 0.15f;
 
-        public Transform focusTransform = null;
+        public UnityEngine.Transform focusTransform = null;
         public Texture2D bokehTexture = null;
         public ApertureShape apertureShape = ApertureShape.Circular;
         [Range(0.0f, 179.0f)]

@@ -33,16 +33,7 @@ public class BallSpawner : MonoBehaviour
             if (_ballCount > 2)
             {
                 List<Vector3> ballPositions = GetBallPositions();
-                // 
-                // How to calculate the radius of a sphere?
-                //
-                // The mesh of a component contains an array of vertices (positions) in local space.
-                // In a sphere, all vertices have an equal distance (radius) to the center (at Vector3.zero in local space).
-                // Any vertex of the vertices-array is OK to calculate the radius, so just take the first.
-                // 
-                Mesh mesh = _startBall.GetComponent<MeshFilter>().sharedMesh;
-                Vector3 vertex = mesh.vertices.First<Vector3>();
-                float radius = Vector3.Distance(Vector3.zero, vertex);
+                float radius = GetBallRadius(_startBall);
                 foreach (Vector3 pos in ballPositions)
                 {
                     Gizmos.DrawWireSphere(pos, radius);
@@ -58,6 +49,20 @@ public class BallSpawner : MonoBehaviour
                 Gizmos.DrawWireSphere(_endBall.transform.position, _colliderRadius);
             }
         }
+    }
+
+    float GetBallRadius(GameObject sphere)
+    {
+        // 
+        // How to calculate the radius of a sphere?
+        //
+        // The mesh of a component contains an array of vertices (positions) in local space.
+        // In a sphere, all vertices have an equal distance (radius) to the center (at Vector3.zero in local space).
+        // Any vertex of the vertices-array is OK to calculate the radius, so just take the first.
+        // 
+        Mesh mesh = _startBall.GetComponent<MeshFilter>().sharedMesh;
+        Vector3 vertex = mesh.vertices.First<Vector3>();
+        return Vector3.Distance(Vector3.zero, vertex);
     }
 
     List<Vector3> GetBallPositions()
