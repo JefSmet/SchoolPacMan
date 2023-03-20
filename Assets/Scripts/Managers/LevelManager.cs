@@ -16,6 +16,25 @@ public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
     public List<GameObject> PatrolPoints { get { return _patrolpoints; } }
     public List<Studiepunt> Studiepunten { get { return _studiepunten;} }
     public int LevelScore { get; set; }
+    void Start()
+    {        
+        _patrolpoints.AddRange(GameObject.FindGameObjectsWithTag("PatrolPoint"));
+        _studiepunten.AddRange(FindObjectsOfType<Studiepunt>());
+        InitializeBalls();
+        RandomizeSuperballs();
+        GameManager.Instance.HudController.SetSPText(0);
+        GameManager.Instance.HudController.SetBallsToGoText(GetActiveStudiepunten());
+        GameManager.Instance.HudController.SetLivesText(3);
+    }
+    private void OnEnable()
+    {
+        SerialCommThreaded.onButtonPressed += SwitchBalls;
+    }
+
+    private void OnDisable()
+    {
+        SerialCommThreaded.onButtonPressed -= SwitchBalls;
+    }
 
     public void StudiepuntPickedUp(Studiepunt sp)
     {
@@ -27,20 +46,11 @@ public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
             GameManager.Instance.ArduinoController.Blink(GetStudiepuntLight(sp));       
     }
 
-    private void OnEnable()
-    {
-        SerialCommThreaded.onButtonPressed += ArduinoButtonPressed;
-    }
 
-    private void OnDisable()
-    {
-        SerialCommThreaded.onButtonPressed -= ArduinoButtonPressed;
-    }
-
-    void ArduinoButtonPressed()
-    {
-        SwitchBalls();
-    }
+    //void ArduinoButtonPressed()
+    //{
+    //    SwitchBalls();
+    //}
 
     private void SwitchBalls()
     {
@@ -101,14 +111,6 @@ public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
         rend.material.color = color;
     }
 
-    void Start()
-    {        
-        _patrolpoints.AddRange(GameObject.FindGameObjectsWithTag("PatrolPoint"));
-        _studiepunten.AddRange(FindObjectsOfType<Studiepunt>());
-        GameManager.Instance.HudController.SetBallsToGoText(GetActiveStudiepunten());
-        InitializeBalls();
-        RandomizeSuperballs();    
-    }
 
 
 }

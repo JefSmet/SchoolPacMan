@@ -13,6 +13,14 @@ public class GameManager : SingletonPersistent<GameManager>
     SerialCommThreaded _arduinoController;
     HUDController _hudController;
     public int GameScore { get; set; }
+    private int lives;
+
+    public int Lives
+    {
+        get { return lives; }
+        set { lives = value; if (lives > -1) _hudController.SetLivesText(Lives); }
+    }
+
     public HUDController HudController
     { 
         get 
@@ -68,5 +76,6 @@ public class GameManager : SingletonPersistent<GameManager>
         {
             _hudController.SetPlayerSpeedText(fpc.MoveSpeed);
         }
+        Lives = 3;
     }
 }
