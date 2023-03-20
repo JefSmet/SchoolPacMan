@@ -26,7 +26,7 @@ public class State
 
     float visDist = 10.0f;
     float visAngle = 30.0f;
-    float attackDistance = 7.0f;
+    float attackDistance = 2.0f;
     
     public State(GameObject npc, NavMeshAgent agent, Animator anim, Transform player,AudioSource audioSource)
     {

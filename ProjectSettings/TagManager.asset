@@ -11,6 +11,8 @@ TagManager:
   - Studiepunt
   - Wall
   - PatrolPoint
+  - AISpawn
+  - PlayerSpawn
   layers:
   - Default
   - TransparentFX

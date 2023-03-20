@@ -4,6 +4,8 @@ using UnityEngine;
 using QuestMan;
 using QuestMan.Singleton;
 using StarterAssets;
+using System;
+using UnityEngine.SceneManagement;
 
 public class GameManager : SingletonPersistent<GameManager>
 {
@@ -18,7 +20,17 @@ public class GameManager : SingletonPersistent<GameManager>
     public int Lives
     {
         get { return lives; }
-        set { lives = value; if (lives > -1) _hudController.SetLivesText(Lives); }
+        set { lives = value; if (lives > -1) _hudController.SetLivesText(lives); else { Defeat(); } }
+    }
+
+    private void Defeat()
+    {
+        SceneManager.LoadScene("Defeat");
+    }
+
+    public void Victory()
+    {
+        SceneManager.LoadScene("Victory");
     }
 
     public HUDController HudController
@@ -77,5 +89,11 @@ public class GameManager : SingletonPersistent<GameManager>
             _hudController.SetPlayerSpeedText(fpc.MoveSpeed);
         }
         Lives = 3;
+    }
+
+    public void LoadNextLevel()
+    {
+        HudController.gameObject.SetActive(false);
+        SceneManager.LoadScene("NextLevel");
     }
 }

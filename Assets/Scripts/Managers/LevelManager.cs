@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.AI;
 
 public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
 {
@@ -10,14 +11,21 @@ public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
     [SerializeField] int superballValue = 10;
     [SerializeField] Color superballColor = Color.red;
     [SerializeField] float percentageSuperballs = 20f;
+    private Transform aiSpawn;
+    private Transform playerSpawn;
+
+    float radius=1f;
 
     List<GameObject> _patrolpoints = new List<GameObject>();
     List<Studiepunt> _studiepunten = new List<Studiepunt>();
+    List<GameObject> agents= new List<GameObject>();
     public List<GameObject> PatrolPoints { get { return _patrolpoints; } }
     public List<Studiepunt> Studiepunten { get { return _studiepunten;} }
     public int LevelScore { get; set; }
     void Start()
-    {        
+    {
+        aiSpawn = GameObject.FindGameObjectWithTag("AISpawn").transform;
+        playerSpawn = GameObject.FindGameObjectWithTag("PlayerSpawn").transform;
         _patrolpoints.AddRange(GameObject.FindGameObjectsWithTag("PatrolPoint"));
         _studiepunten.AddRange(FindObjectsOfType<Studiepunt>());
         InitializeBalls();
@@ -25,6 +33,18 @@ public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
         GameManager.Instance.HudController.SetSPText(0);
         GameManager.Instance.HudController.SetBallsToGoText(GetActiveStudiepunten());
         GameManager.Instance.HudController.SetLivesText(3);
+        GameObject.FindGameObjectWithTag("Player").transform.position=playerSpawn.position;
+        agents.AddRange(GameObject.FindGameObjectsWithTag("AI"));
+        foreach (GameObject agent in agents)
+        {
+            Vector3 position = aiSpawn.position + Random.insideUnitSphere * radius;
+            position.y= 3.373623e-05f;
+            agent.GetComponent<NavMeshAgent>().enabled= false;
+            agent.transform.position = position;
+            agent.GetComponent<NavMeshAgent>().enabled = true;
+            //agent.transform.position= aiSpawn.position;
+        }
+        
     }
     private void OnEnable()
     {
@@ -43,8 +63,14 @@ public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
             GameManager.Instance.GameScore += sp.Value;
             GameManager.Instance.HudController.SetSPText(LevelScore);
             GameManager.Instance.HudController.SetBallsToGoText(GetActiveStudiepunten());         
-            GameManager.Instance.ArduinoController.Blink(GetStudiepuntLight(sp));       
+            GameManager.Instance.ArduinoController.Blink(GetStudiepuntLight(sp));
+        if (GetActiveStudiepunten()==0)
+        {
+            GameManager.Instance.LoadNextLevel();
+        }
     }
+
+    
 
 
     //void ArduinoButtonPressed()
