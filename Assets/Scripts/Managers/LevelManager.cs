@@ -1,23 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using QuestMan.Singleton;
-using System.Runtime.CompilerServices;
+using System.Linq;
+using UnityEngine.AI;
 
-public class LevelManager : MonoBehaviourSingleton<LevelManager>
+public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
 {
-<<<<<<< Updated upstream
-    private List<GameObject> waypoints = new List<GameObject>();
-    private Dictionary<Studiepunt,int> studiepunten = new Dictionary<Studiepunt,int>();
-    private int total;
-    public List<GameObject> Waypoints{get { return waypoints; }}
-    public Dictionary<Studiepunt,int> Studiepunten { get { return studiepunten;} }
-    public int StudiepuntenValues {
-        get 
-        { 
-            total= 0;
-            foreach(int values in studiepunten.Values)
-=======
     [SerializeField] int ballValue = 5;
     [SerializeField] Color ballColor = Color.green;
 
@@ -64,7 +51,9 @@ public class LevelManager : MonoBehaviourSingleton<LevelManager>
 
     private void RespawnPlayer()
     {
-        player.transform.position = playerSpawn.position;        
+        Debug.Log("Player Respawned");
+        player.transform.position = playerSpawn.position;
+        
     }
 
     private void RespawnAgents()
@@ -109,35 +98,57 @@ public class LevelManager : MonoBehaviourSingleton<LevelManager>
         foreach (Studiepunt sp in _studiepunten.Where(sp => sp.gameObject.activeInHierarchy))
         {
             if (sp.Value == ballValue)
->>>>>>> Stashed changes
             {
-                total+= values;
+                ChangeBallValueColor(sp, superballValue, superballColor);
             }
-            return total ; 
-        } 
-    }
-    public int StudieBallenCount { get { return studiepunten.Count; } }
-
-    public void RemoveStudiepunt(Studiepunt studiepunt)
-    {
-        studiepunten.Remove(studiepunt);
-        Destroy(studiepunt.gameObject);
-        //if (!studiepunten.Remove(studiepunt))
-        //    Debug.Log(studiepunt.gameObject.name + " is not removed");
-        //Destroy(studiepunt.gameObject);
-
-    }
-
-
-    void Awake()
-    {
-        Studiepunt[] studiepuntenArray = FindObjectsOfType<Studiepunt>();
-        waypoints.AddRange(GameObject.FindGameObjectsWithTag("Waypoint"));
-        foreach (Studiepunt sp in studiepuntenArray)
-        {
-            studiepunten.Add(sp,sp.Value) ;
+            else
+            {
+                ChangeBallValueColor(sp, ballValue, ballColor);
+            }
         }
     }
 
+    ArduinoLight GetStudiepuntLight(Studiepunt sp)
+    {
+        if (sp.Value == ballValue)
+        {
+            return ArduinoLight.GreenLight;
+        }
+        return ArduinoLight.RedLight;
+    }
 
+    int GetActiveStudiepunten()
+    {
+        return _studiepunten.Where(sp => sp.gameObject.activeInHierarchy).Count();
+    }
+
+    void InitializeBalls()
+    {
+        foreach (Studiepunt sp in _studiepunten)
+        {
+            ChangeBallValueColor(sp, ballValue, ballColor);
+        }
+    }
+
+    void RandomizeSuperballs()
+    {
+        int superballCount = Mathf.RoundToInt(percentageSuperballs / 100 * _studiepunten.Count());
+
+        for (int i = 0; i < superballCount; i++)
+        {
+            int index = Random.Range(0, _studiepunten.Count());
+            while (_studiepunten[index].Value == superballValue)
+            {
+                index = Random.Range(0, _studiepunten.Count());
+            }
+            ChangeBallValueColor(_studiepunten[index], superballValue, superballColor);
+        }
+    }
+
+    void ChangeBallValueColor(Studiepunt studiepunt, int value, Color color)
+    {
+        studiepunt.Value = value;
+        Renderer rend = studiepunt.GetComponent<Renderer>();
+        rend.material.color = color;
+    }
 }
