@@ -14,8 +14,6 @@ public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
     private Transform aiSpawn;
     private Transform playerSpawn;
 
-    float radius = 1f;
-
     List<GameObject> _patrolpoints = new List<GameObject>();
     List<Studiepunt> _studiepunten = new List<Studiepunt>();
     List<GameObject> agents = new List<GameObject>();
