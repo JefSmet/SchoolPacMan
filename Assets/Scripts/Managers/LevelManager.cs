@@ -151,7 +151,4 @@ public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
         Renderer rend = studiepunt.GetComponent<Renderer>();
         rend.material.color = color;
     }
-
-
-
 }
