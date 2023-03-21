@@ -19,7 +19,7 @@ public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
     List<Studiepunt> _studiepunten = new List<Studiepunt>();
     List<GameObject> agents = new List<GameObject>();
     private GameObject player;
-    private PlayerInput playerInput;
+    //private PlayerInput playerInput;
 
     public List<GameObject> PatrolPoints { get { return _patrolpoints; } }
     public List<Studiepunt> Studiepunten { get { return _studiepunten; } }
@@ -37,7 +37,7 @@ public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
         GameManager.Instance.HudController.SetLivesText(3);
         agents.AddRange(GameObject.FindGameObjectsWithTag("AI"));
         player = GameObject.FindGameObjectWithTag("Player");
-        playerInput = player.GetComponent<PlayerInput>();
+        //playerInput = player.GetComponent<PlayerInput>();
         RespawnPlayer();
         RespawnAgents();
 
@@ -54,9 +54,9 @@ public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
 
     private void RespawnPlayer()
     {
-        playerInput.enabled = false;
+        //playerInput.enabled = false;
         player.transform.position = playerSpawn.position;
-        playerInput.enabled = true;
+        //playerInput.enabled = true;
     }
 
     private void RespawnAgents()
