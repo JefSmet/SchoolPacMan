@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.AI;
+using UnityEngine.InputSystem;
 
 public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
 {
@@ -51,9 +52,9 @@ public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
 
     private void RespawnPlayer()
     {
-        Debug.Log("Player Respawned");
+        player.GetComponent<PlayerInput>().enabled = false;
         player.transform.position = playerSpawn.position;
-        
+        player.GetComponent<PlayerInput>().enabled = true;
     }
 
     private void RespawnAgents()
