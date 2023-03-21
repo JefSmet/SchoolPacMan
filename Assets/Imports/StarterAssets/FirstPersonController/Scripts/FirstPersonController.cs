@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 #endif
@@ -74,7 +75,26 @@ namespace StarterAssets
 
 		private const float _threshold = 0.01f;
 
-		private bool IsCurrentDeviceMouse
+		void ArduinoPotentioValueChanged(int value)
+		{
+			float speed = value;
+			speed = speed.Remap(0, 1023, 1, 10);
+			MoveSpeed = speed;
+			SprintSpeed= speed*1.5f;
+			GameManager.Instance.HudController.SetPlayerSpeedText(speed);
+		}
+
+        private void OnEnable()
+        {
+			SerialCommThreaded.onPotentioValueChanged += ArduinoPotentioValueChanged;
+        }
+
+        private void OnDisable()
+        {
+            SerialCommThreaded.onPotentioValueChanged -= ArduinoPotentioValueChanged;
+        }
+
+        private bool IsCurrentDeviceMouse
 		{
 			get
 			{
@@ -114,7 +134,10 @@ namespace StarterAssets
 		{
 			JumpAndGravity();
 			GroundedCheck();
+			//MoveSpeed = Mathf.Round(GameManager.Instance.ArduinoController.PotValue.Remap(0, 1023, 1, 10));
+			//SprintSpeed = MoveSpeed * 1.5f;
 			Move();
+
 		}
 
 		private void LateUpdate()
@@ -264,5 +287,5 @@ namespace StarterAssets
 			// when selected, draw a gizmo in the position of, and matching radius of, the grounded collider
 			Gizmos.DrawSphere(new Vector3(transform.position.x, transform.position.y - GroundedOffset, transform.position.z), GroundedRadius);
 		}
-	}
+    }
 }

@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5422705192195394917, guid: de4b9d44bbad2764ebf8e2a19a344e38, type: 3}
       propertyPath: m_Name
-      value: Chair_Black
+      value: Chair_Black90
       objectReference: {fileID: 0}
     - target: {fileID: 5425968765847747173, guid: de4b9d44bbad2764ebf8e2a19a344e38, type: 3}
       propertyPath: m_RootOrder
@@ -55,5 +55,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: de4b9d44bbad2764ebf8e2a19a344e38, type: 3}

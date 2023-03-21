@@ -25,7 +25,7 @@ namespace TMPro.Examples
         [SerializeField]
         private TMP_Text m_TextComponent;
 
-        private Transform m_Transform;
+        private UnityEngine.Transform m_Transform;
         private TMP_TextInfo m_TextInfo;
 
         private float m_ScaleMultiplier;

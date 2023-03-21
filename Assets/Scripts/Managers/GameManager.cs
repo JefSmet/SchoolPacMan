@@ -3,29 +3,97 @@ using System.Collections.Generic;
 using UnityEngine;
 using QuestMan;
 using QuestMan.Singleton;
-using QuestMan.Observer;
+using StarterAssets;
+using System;
+using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviourSingletonPersistent<GameManager>
+public class GameManager : SingletonPersistent<GameManager>
 {
-    
-    public GameObject hudControllerPrefab;
-    private int currentStudiepunten;
-    HUDController hudController;
-    
-    public void AddStudiepunt(Studiepunt punt)
+    [SerializeField]GameObject _hudControllerPrefab;
+    [SerializeField]GameObject _arduinoControllerPrefab;
+    [SerializeField]LevelManager _levelManager;
+    SerialCommThreaded _arduinoController;
+    HUDController _hudController;
+    public int GameScore { get; set; }
+    private int lives;
+
+    public int Lives
     {
-        currentStudiepunten += punt.Value;
-        LevelManager.Instance.RemoveStudiepunt(punt);
-        //LevelManager.Instance.Studiepunten.Remove(punt);
-        //Destroy(punt.gameObject);
-        hudController.UpdateStudiepunten(currentStudiepunten);
+        get { return lives; }
+        set { lives = value; if (lives > -1) _hudController.SetLivesText(lives); else { Defeat(); } }
     }
 
-    void Start()
+    private void Defeat()
     {
-        currentStudiepunten = 0;
-        hudControllerPrefab = GameObject.Instantiate(hudControllerPrefab);
-        hudController= hudControllerPrefab.GetComponent<HUDController>();
-        
+        SceneManager.LoadScene("Defeat");
+    }
+
+    public void Victory()
+    {
+        SceneManager.LoadScene("Victory");
+    }
+
+    public HUDController HudController
+    { 
+        get 
+        {  
+            if (_hudController == null)
+            {                
+                if (_hudControllerPrefab == null)
+                {
+                    _hudController = gameObject.AddComponent<HUDController>();
+                }
+                else
+                {
+                    _hudController = _hudControllerPrefab.GetComponent<HUDController>();
+                }
+            }   
+            return _hudController;
+        }
+    }
+    public SerialCommThreaded ArduinoController 
+    {
+        get
+        {
+            if (_arduinoController == null)
+            {
+                if (_arduinoControllerPrefab == null)
+                {
+                    _arduinoController = gameObject.AddComponent<SerialCommThreaded>();
+                }
+                else
+                {
+                    _arduinoController = _arduinoControllerPrefab.GetComponent<SerialCommThreaded>();
+                }
+            }
+            return _arduinoController;
+        }
+    }
+    public LevelManager LevelManager 
+    {
+        get 
+        { 
+            if (_levelManager == null)
+            {
+                _levelManager= gameObject.AddComponent<LevelManager>();
+            }
+            return _levelManager; 
+        } 
+    }
+
+    private void Start()
+    {
+        FirstPersonController fpc = GameObject.FindObjectOfType<FirstPersonController>();
+        if (fpc != null) 
+        {
+            _hudController.SetPlayerSpeedText(fpc.MoveSpeed);
+        }
+        Lives = 3;
+    }
+
+    public void LoadNextLevel()
+    {
+        HudController.gameObject.SetActive(false);
+        SceneManager.LoadScene("NextLevel");
     }
 }

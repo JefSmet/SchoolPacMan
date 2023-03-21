@@ -8,8 +8,11 @@ TagManager:
   - AI
   - LinkStart
   - LinkEnd
-  - Waypoint
   - Studiepunt
+  - Wall
+  - PatrolPoint
+  - AISpawn
+  - PlayerSpawn
   layers:
   - Default
   - TransparentFX
@@ -18,8 +21,8 @@ TagManager:
   - Water
   - UI
   - ground
-  - 
-  - 
+  - Wall
+  - Player
   - 
   - 
   - 

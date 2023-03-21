@@ -2000,10 +2000,9 @@ GameObject:
   m_Component:
   - component: {fileID: 6631964419132099031}
   - component: {fileID: 4794373558246576253}
-  - component: {fileID: 444395819}
   m_Layer: 0
   m_Name: Cop
-  m_TagString: Untagged
+  m_TagString: AI
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2038,7 +2037,7 @@ NavMeshAgent:
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -2046,19 +2045,6 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &444395819
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6644603938449114179}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 58c08200a8760874fbfb718b5d574365, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 0}
 --- !u!1 &6869289770107773416
 GameObject:
   m_ObjectHideFlags: 0
@@ -2376,8 +2362,8 @@ GameObject:
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 8
+  m_NavMeshLayer: 3
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &1878865841875949009
 Transform:
