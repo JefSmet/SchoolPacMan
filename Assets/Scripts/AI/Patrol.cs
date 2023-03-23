@@ -48,7 +48,12 @@ public class Patrol : State
             //currentIndex = (currentIndex + 1) % LevelManager.Instance.Waypoints.Count;
             currentIndex= Random.Range(0, LevelManager.Instance.PatrolPoints.Count-1);
             agent.SetDestination(LevelManager.Instance.PatrolPoints[currentIndex].transform.position);
-        }        
+        }  
+        else if (IsPlayerBehind())
+        {
+            nextState = new RunAway(npc, agent, anim, player, audioSource);
+            stage = EVENT.EXIT;
+        }
     }
     public override void Exit() 
     {

@@ -87,6 +87,17 @@ public class State
         return false;
     }
 
+    public bool IsPlayerBehind()
+    {
+        Vector3 direction = npc.transform.position - player.transform.position;
+        float angle = Vector3.Angle(direction, npc.transform.forward);
+        if ((direction.magnitude < 3) && (angle < 45))
+        {            
+            return true;
+        }
+        return false;
+    }
+
     public bool CanAttackPlayer()
     {
         Vector3 direction = player.transform.position - npc.transform.position;

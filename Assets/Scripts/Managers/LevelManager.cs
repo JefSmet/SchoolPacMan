@@ -8,28 +8,29 @@ public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
 {
     [SerializeField] int ballValue = 5;
     [SerializeField] Color ballColor = Color.green;
-
     [SerializeField] int superballValue = 10;
     [SerializeField] Color superballColor = Color.red;
     [SerializeField] float percentageSuperballs = 20f;
-    private Transform aiSpawn;
-    private Transform playerSpawn;
-
-    List<GameObject> _patrolpoints = new List<GameObject>();
-    List<Studiepunt> _studiepunten = new List<Studiepunt>();
+    List<GameObject> patrolpoints = new List<GameObject>();
+    List<GameObject> runAwayPoints = new List<GameObject>();
+    List<Studiepunt> studiepunten = new List<Studiepunt>();
     List<GameObject> agents = new List<GameObject>();
-    private GameObject player;
-    private PlayerInput playerInput;
+    GameObject player;
+    PlayerInput playerInput;
+    Transform aiSpawn;
+    Transform playerSpawn;
 
-    public List<GameObject> PatrolPoints { get { return _patrolpoints; } }
-    public List<Studiepunt> Studiepunten { get { return _studiepunten; } }
+    public List<GameObject> PatrolPoints { get { return patrolpoints; } }
+    public List<Studiepunt> Studiepunten { get { return studiepunten; } }
+    public List<GameObject> RunAwayPoints { get { return runAwayPoints; } }
     public int LevelScore { get; set; }
     void Start()
     {
         aiSpawn = GameObject.FindGameObjectWithTag("AISpawn").transform;
         playerSpawn = GameObject.FindGameObjectWithTag("PlayerSpawn").transform;
-        _patrolpoints.AddRange(GameObject.FindGameObjectsWithTag("PatrolPoint"));
-        _studiepunten.AddRange(FindObjectsOfType<Studiepunt>());
+        patrolpoints.AddRange(GameObject.FindGameObjectsWithTag("PatrolPoint"));
+        runAwayPoints.AddRange(GameObject.FindGameObjectsWithTag("RunAwayAI"));
+        studiepunten.AddRange(FindObjectsOfType<Studiepunt>());
         InitializeBalls();
         RandomizeSuperballs();
         GameManager.Instance.HudController.SetSPText(0);
@@ -98,7 +99,7 @@ public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
 
     private void SwitchBalls()
     {
-        foreach (Studiepunt sp in _studiepunten.Where(sp => sp.gameObject.activeInHierarchy))
+        foreach (Studiepunt sp in studiepunten.Where(sp => sp.gameObject.activeInHierarchy))
         {
             if (sp.Value == ballValue)
             {
@@ -122,12 +123,12 @@ public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
 
     int GetActiveStudiepunten()
     {
-        return _studiepunten.Where(sp => sp.gameObject.activeInHierarchy).Count();
+        return studiepunten.Where(sp => sp.gameObject.activeInHierarchy).Count();
     }
 
     void InitializeBalls()
     {
-        foreach (Studiepunt sp in _studiepunten)
+        foreach (Studiepunt sp in studiepunten)
         {
             ChangeBallValueColor(sp, ballValue, ballColor);
         }
@@ -135,16 +136,16 @@ public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
 
     void RandomizeSuperballs()
     {
-        int superballCount = Mathf.RoundToInt(percentageSuperballs / 100 * _studiepunten.Count());
+        int superballCount = Mathf.RoundToInt(percentageSuperballs / 100 * studiepunten.Count());
 
         for (int i = 0; i < superballCount; i++)
         {
-            int index = Random.Range(0, _studiepunten.Count());
-            while (_studiepunten[index].Value == superballValue)
+            int index = Random.Range(0, studiepunten.Count());
+            while (studiepunten[index].Value == superballValue)
             {
-                index = Random.Range(0, _studiepunten.Count());
+                index = Random.Range(0, studiepunten.Count());
             }
-            ChangeBallValueColor(_studiepunten[index], superballValue, superballColor);
+            ChangeBallValueColor(studiepunten[index], superballValue, superballColor);
         }
     }
 

@@ -13,6 +13,7 @@ TagManager:
   - PatrolPoint
   - AISpawn
   - PlayerSpawn
+  - RunAwayAI
   layers:
   - Default
   - TransparentFX

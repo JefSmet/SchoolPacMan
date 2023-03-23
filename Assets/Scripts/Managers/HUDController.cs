@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using StarterAssets;
 
 public class HUDController : MonoBehaviour 
 {
@@ -16,6 +17,12 @@ public class HUDController : MonoBehaviour
     [SerializeField] string captionPlayerSpeed = "Loopsnelheid: ";
     [SerializeField] string captionLives = "Levens: ";
 
+    FirstPersonController _firstPersonController;
+
+    private void OnEnable()
+    {
+        
+    }
     public void SetSPText(int studiepunten)
     {
         _spText.text = captionSP + studiepunten;
@@ -34,13 +41,6 @@ public class HUDController : MonoBehaviour
     public void SetLivesText(int lives)
     {
         _livesText.text = captionLives + lives;
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        //SetSPText(0);
-        //SetBallsToGoText(LevelManager.Instance.Studiepunten.Count);
     }
 
 }

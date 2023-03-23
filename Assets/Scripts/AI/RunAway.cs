@@ -10,9 +10,9 @@ public class RunAway : State
     {
         name = STATE.RUNAWAY;
         float biggestDistance = 0;
-        for (int i = 0; i < LevelManager.Instance.PatrolPoints.Count; i++)
+        for (int i = 0; i < LevelManager.Instance.RunAwayPoints.Count; i++)
         {
-            GameObject thisCheckpoint = LevelManager.Instance.PatrolPoints[i];
+            GameObject thisCheckpoint = LevelManager.Instance.RunAwayPoints[i];
             float distance = Vector3.Distance(npc.transform.position, thisCheckpoint.transform.position);
             if (distance > biggestDistance)
             {
@@ -27,10 +27,10 @@ public class RunAway : State
         if (anim != null)
         {
             anim.SetTrigger("isRunning");
-        }
-        agent.speed = 10;
+        }      
+        agent.speed = 15;
         agent.isStopped = false;
-        agent.SetDestination(LevelManager.Instance.PatrolPoints[currentIndex].transform.position);
+        agent.SetDestination(LevelManager.Instance.RunAwayPoints[currentIndex].transform.position);
         base.Enter();
     }
 
