@@ -7,7 +7,7 @@ public class State
 {
     public enum STATE
     {
-        IDLE, PURSUE, PATROL, ATTACK, RUNAWAY
+        IDLE, PURSUE, PATROL, ATTACK, RUNAWAY, FLEE, CLEVERPURSUE, EVADE, WANDER, CLEVERHIDE
     }
 
     public enum EVENT
@@ -67,6 +67,30 @@ public class State
                 return nextState;
         }      
         return this;
+    }
+
+    public void Seek(Vector3 location)
+    {
+        if(!agent.pathPending)
+        {
+            agent.isStopped = false;
+            agent.SetDestination(location);
+        }
+    }
+
+    public void Flee(Vector3 location)
+    {
+        if (!agent.pathPending)
+        {
+            agent.isStopped = false;
+            //work out the vector away from the location
+            //this is 180 degrees to the vector to the location
+            Vector3 fleeVector = location - npc.transform.position;
+
+            //take this vector away from the agent's position and 
+            //set this as the new location on the nav mesh
+            agent.SetDestination(npc.transform.position - fleeVector);
+        }
     }
 
     public bool CanSeePlayer()

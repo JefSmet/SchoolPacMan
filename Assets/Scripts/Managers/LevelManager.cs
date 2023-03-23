@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Linq;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
+using StarterAssets;
 
 public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
 {
@@ -13,17 +14,22 @@ public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
     [SerializeField] float percentageSuperballs = 20f;
     List<GameObject> patrolpoints = new List<GameObject>();
     List<GameObject> runAwayPoints = new List<GameObject>();
+    List<GameObject> hidingPoints = new List<GameObject>();
     List<Studiepunt> studiepunten = new List<Studiepunt>();
     List<GameObject> agents = new List<GameObject>();
     GameObject player;
     PlayerInput playerInput;
+    FirstPersonController fpc;
     Transform aiSpawn;
     Transform playerSpawn;
 
     public List<GameObject> PatrolPoints { get { return patrolpoints; } }
     public List<Studiepunt> Studiepunten { get { return studiepunten; } }
+
     public List<GameObject> RunAwayPoints { get { return runAwayPoints; } }
+    public List<GameObject> HidingPoints { get { return runAwayPoints; } }
     public int LevelScore { get; set; }
+    public float PlayerMoveSpeed { get { return fpc.MoveSpeed; } }
     void Start()
     {
         aiSpawn = GameObject.FindGameObjectWithTag("AISpawn").transform;
@@ -39,9 +45,9 @@ public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
         agents.AddRange(GameObject.FindGameObjectsWithTag("AI"));
         player = GameObject.FindGameObjectWithTag("Player");
         playerInput = player.GetComponent<PlayerInput>();
+        fpc = player.GetComponent<FirstPersonController>();
         RespawnPlayer();
         RespawnAgents();
-
     }
 
 
