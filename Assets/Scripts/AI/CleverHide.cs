@@ -16,6 +16,10 @@ public class CleverHide : State
     {
         base.Enter();
         agent.speed = 3f;
+        if (anim != null)
+        {
+            anim.SetTrigger("isWalking");
+        }
     }
 
     public override void Update()
@@ -24,20 +28,20 @@ public class CleverHide : State
         float dist = Mathf.Infinity;
         Vector3 chosenSpot = Vector3.zero;
         Vector3 chosenDir = Vector3.zero;
-        GameObject chosenGO = World.Instance.GetHidingSpots()[0];
+        GameObject chosenGO = LevelManager.Instance.HidingPoints[0];
 
         //same logic as for Hide() to find the closest hiding spot
-        for (int i = 0; i < World.Instance.GetHidingSpots().Length; i++)
+        for (int i = 0; i < LevelManager.Instance.HidingPoints.Count; i++)
         {
-            Vector3 hideDir = World.Instance.GetHidingSpots()[i].transform.position - target.transform.position;
-            Vector3 hidePos = World.Instance.GetHidingSpots()[i].transform.position + hideDir.normalized * 100;
+            Vector3 hideDir = LevelManager.Instance.HidingPoints[i].transform.position - player.position;
+            Vector3 hidePos = LevelManager.Instance.HidingPoints[i].transform.position + hideDir.normalized * 100;
 
-            if (Vector3.Distance(this.transform.position, hidePos) < dist)
+            if (Vector3.Distance(npc.transform.position, hidePos) < dist)
             {
                 chosenSpot = hidePos;
                 chosenDir = hideDir;
-                chosenGO = World.Instance.GetHidingSpots()[i];
-                dist = Vector3.Distance(this.transform.position, hidePos);
+                chosenGO = LevelManager.Instance.HidingPoints[i];
+                dist = Vector3.Distance(npc.transform.position, hidePos);
             }
         }
 
@@ -58,5 +62,9 @@ public class CleverHide : State
     public override void Exit()
     {
         base.Exit();
+        if (anim != null)
+        {
+            anim.ResetTrigger("isWalking");
+        }
     }
 }

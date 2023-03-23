@@ -27,7 +27,7 @@ public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
     public List<Studiepunt> Studiepunten { get { return studiepunten; } }
 
     public List<GameObject> RunAwayPoints { get { return runAwayPoints; } }
-    public List<GameObject> HidingPoints { get { return runAwayPoints; } }
+    public List<GameObject> HidingPoints { get { return hidingPoints; } }
     public int LevelScore { get; set; }
     public float PlayerMoveSpeed { get { return fpc.MoveSpeed; } }
     void Start()
@@ -36,6 +36,7 @@ public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
         playerSpawn = GameObject.FindGameObjectWithTag("PlayerSpawn").transform;
         patrolpoints.AddRange(GameObject.FindGameObjectsWithTag("PatrolPoint"));
         runAwayPoints.AddRange(GameObject.FindGameObjectsWithTag("RunAwayAI"));
+        hidingPoints.AddRange(GameObject.FindGameObjectsWithTag("HidingPoint"));
         studiepunten.AddRange(FindObjectsOfType<Studiepunt>());
         InitializeBalls();
         RandomizeSuperballs();
