@@ -71,6 +71,14 @@ public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
         }
     }
 
+    public void RespawnAgent(GameObject agent)
+    {
+        NavMeshAgent nma = agent.GetComponent<NavMeshAgent>();
+        nma.enabled = false;
+        agent.transform.position = aiSpawn.position;
+        nma.enabled = true;
+    }
+
     private void OnEnable()
     {
         SerialCommThreaded.onButtonPressed += SwitchBalls;

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -25,5 +26,16 @@ public class AI : MonoBehaviour
     void Update()
     {
         currentState = currentState.Process();
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+
+        if (collision.gameObject.tag=="Studiepunt")
+        {
+            LevelManager.Instance.RespawnAgent(gameObject);
+            currentState = new Idle(gameObject, agent, animator, player, audioSource);
+        }
+        
     }
 }
