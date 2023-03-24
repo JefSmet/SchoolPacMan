@@ -34,7 +34,8 @@ public class Patrol : State
         }  
         else if (IsPlayerBehind())
         {
-            nextState = new RunAway(npc, agent, anim, player, audioSource);
+            nextState = new 
+                RunAway(npc, agent, anim, player, audioSource);
             stage = EVENT.EXIT;
         }
     }

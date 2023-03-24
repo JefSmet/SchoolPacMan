@@ -96,7 +96,7 @@ public class State
 
     public bool CanSeePlayer()
     {
-        Vector3 direction = player.transform.position- npc.transform.position;
+        Vector3 direction = player.position- npc.transform.position;
         float angle = Vector3.Angle(direction, npc.transform.forward);
 
         if ((direction.magnitude < visDist) && (angle < visAngle))
@@ -114,7 +114,7 @@ public class State
 
     public bool IsPlayerBehind()
     {
-        Vector3 direction = npc.transform.position - player.transform.position;
+        Vector3 direction = npc.transform.position - player.position;
         float angle = Vector3.Angle(direction, npc.transform.forward);
         if ((direction.magnitude < 3) && (angle < 45))
         {            
@@ -125,7 +125,24 @@ public class State
 
     public bool CanAttackPlayer()
     {
-        Vector3 direction = player.transform.position - npc.transform.position;
+        Vector3 direction = player.position - npc.transform.position;
         return direction.magnitude < attackDistance;
+    }
+
+    public bool PlayerCanSeeNpc()
+    {
+        Vector3 toAgent= npc.transform.position - player.position;
+        float lookingAngle= Vector3.Angle(player.forward, toAgent);
+        if (lookingAngle <67.5f)
+        {
+            LayerMask mask = LayerMask.GetMask("Wall");
+            // Check if a Wall is hit.
+            if (Physics.Raycast(player.position, player.forward, toAgent.magnitude, mask))
+            {
+                return false;
+            }
+            return true;
+        }        
+            return false;        
     }
 }

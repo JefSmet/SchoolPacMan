@@ -16,6 +16,7 @@ TagManager:
   - RunAwayAI
   - Floor
   - HidingPoint
+  - QuestMan
   layers:
   - Default
   - TransparentFX

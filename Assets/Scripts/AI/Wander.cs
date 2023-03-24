@@ -8,6 +8,7 @@ public class Wander : State
     float wanderRadius = 10;
     float wanderDistance = 10;
     float wanderJitter = 1;
+    Vector3 wanderTarget = Vector3.zero;
     public Wander(GameObject npc, NavMeshAgent agent, Animator anim, Transform player, AudioSource audioSource) : base(npc, agent, anim, player, audioSource)
     {
         name = STATE.WANDER;
@@ -26,7 +27,7 @@ public class Wander : State
     public override void Update()
     {
         base.Update();
-        Vector3 wanderTarget = Vector3.zero;
+       
         //determine a location on a circle 
         wanderTarget += new Vector3(Random.Range(-1.0f, 1.0f) * wanderJitter,
                                         0,
