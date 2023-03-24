@@ -23,18 +23,13 @@ public class PatrolDoctor : State
 
     public override void Update()
     {
-        base.Update();
-        Vector3 origin = player.position;
-        Vector3 direction = (npc.transform.position - player.position).normalized;
-        float maxDistance = Vector3.Distance(player.position, npc.transform.position);
-
-        Debug.DrawRay(origin,direction*maxDistance,Color.blue);
-        if (PlayerCanSeeNpc())
+        base.Update();        
+        if (PlayerCanSeeNpc()&&DocCanSeePlayer())
         {
             nextState = new FleeDoctor(npc, agent, anim, player, audioSource);
             stage = EVENT.EXIT;
         }
-        else if (DocCanSeePlayer() && !PlayerCanSeeNpc())
+        else if (DocCanSeePlayer())
         {
             nextState = new PursueDoctor(npc, agent, anim, player, audioSource);
             stage = EVENT.EXIT;
@@ -49,19 +44,23 @@ public class PatrolDoctor : State
 
     public bool DocCanSeePlayer()
     {
-        Vector3 direction = player.transform.position - npc.transform.position;
-        float angle = Vector3.Angle(direction, npc.transform.forward);
+        Vector3 direction = (player.position - npc.transform.position).normalized;
+        float maxDistance = Vector3.Distance(player.position, npc.transform.position);
 
-        if ((direction.magnitude < visDist) && (angle < visAngle))
+
+        float lookingAngle = Vector3.Angle(npc.transform.forward, direction);
+        if ((maxDistance < visDist) && (lookingAngle < visAngle))
         {
             LayerMask mask = LayerMask.GetMask("Wall");
-            // Check if a Wall is hit.
-            if (Physics.Raycast(npc.transform.position, npc.transform.forward, direction.magnitude, mask))
+            RaycastHit hit;
+
+            if (Physics.Raycast(npc.transform.position, direction, out hit, maxDistance, mask))
             {
                 return false;
             }
             return true;
         }
+
         return false;
     }
 }

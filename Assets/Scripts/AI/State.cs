@@ -130,25 +130,19 @@ public class State
     }
 
     public bool PlayerCanSeeNpc()
-    {
-        Vector3 toAgent = npc.transform.position - player.position;
-        float lookingAngle = Vector3.Angle(player.forward, toAgent);
-
-        Vector3 origin = player.position;
+    {        
         Vector3 direction = (npc.transform.position - player.position).normalized;
         float maxDistance = Vector3.Distance(player.position, npc.transform.position);
 
 
-        Debug.DrawRay(origin, direction * maxDistance, Color.blue);
+        float lookingAngle = Vector3.Angle(player.forward, direction);
         if (lookingAngle < 67.5f)
         {
             LayerMask mask = LayerMask.GetMask("Wall");
             RaycastHit hit;
 
-            if (Physics.Raycast(origin, direction, out hit, maxDistance,mask))
+            if (Physics.Raycast(player.position, direction, out hit, maxDistance,mask))
             {
-                Debug.Log("hit wall");
-
                 return false;
             }
             return true;
