@@ -24,7 +24,17 @@ public class PatrolDoctor : State
     public override void Update()
     {
         base.Update();
-        if (DocCanSeePlayer()&&!PlayerCanSeeNpc())
+        Vector3 origin = player.position;
+        Vector3 direction = (npc.transform.position - player.position).normalized;
+        float maxDistance = Vector3.Distance(player.position, npc.transform.position);
+
+        Debug.DrawRay(origin,direction*maxDistance,Color.blue);
+        if (PlayerCanSeeNpc())
+        {
+            nextState = new FleeDoctor(npc, agent, anim, player, audioSource);
+            stage = EVENT.EXIT;
+        }
+        else if (DocCanSeePlayer() && !PlayerCanSeeNpc())
         {
             nextState = new PursueDoctor(npc, agent, anim, player, audioSource);
             stage = EVENT.EXIT;
@@ -34,11 +44,6 @@ public class PatrolDoctor : State
         {
             currentIndex = Random.Range(0, LevelManager.Instance.PatrolPoints.Count - 1);
             agent.SetDestination(LevelManager.Instance.PatrolPoints[currentIndex].transform.position);
-        }
-        else if (PlayerCanSeeNpc())
-        {
-            nextState = new FleeDoctor(npc, agent, anim, player, audioSource);
-            stage = EVENT.EXIT;
         }
     }
 
