@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 5225858436219286134}
   - component: {fileID: 5225858436219286133}
   - component: {fileID: 5225858436219286132}
+  - component: {fileID: 5770426709599380202}
   m_Layer: 6
   m_Name: Table_Black_Mario
   m_TagString: Untagged
@@ -124,6 +125,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!65 &5225858436219286128
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -189,6 +191,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.3996458, y: 1.0001731, z: 0.022020573}
   m_Center: {x: -1.1996193, y: -0.47193605, z: 0.73898995}
+--- !u!208 &5770426709599380202
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5225858436219286129}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 1.2, y: 0.499, z: 0.37500003}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -1.2, y: -0.47100002, z: 0.37500003}
+  m_TimeToStationary: 0.5
 --- !u!1001 &6704192109434092945
 PrefabInstance:
   m_ObjectHideFlags: 0
