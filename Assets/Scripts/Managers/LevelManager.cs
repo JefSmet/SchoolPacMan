@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine.AI;
 using UnityEngine.InputSystem;
 using StarterAssets;
+using System.Collections;
 
 public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
 {
@@ -18,7 +19,6 @@ public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
     List<Studiepunt> studiepunten = new List<Studiepunt>();
     List<GameObject> agents = new List<GameObject>();
     GameObject player;
-    PlayerInput playerInput;
     FirstPersonController fpc;
     Transform aiSpawn;
     Transform playerSpawn;
@@ -45,7 +45,6 @@ public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
         GameManager.Instance.HudController.SetLivesText(3);
         agents.AddRange(GameObject.FindGameObjectsWithTag("AI"));
         player = GameObject.FindGameObjectWithTag("Player");
-        playerInput = player.GetComponent<PlayerInput>();
         fpc = player.GetComponent<FirstPersonController>();
         RespawnPlayer();
         RespawnAgents();
@@ -62,9 +61,15 @@ public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
 
     private void RespawnPlayer()
     {
-        playerInput.enabled = false;
+        fpc.enabled = false;
+        StartCoroutine(respawnDelay());
         player.transform.position = playerSpawn.position;
-        playerInput.enabled = true;
+    }
+
+    IEnumerator respawnDelay()
+    {        
+        yield return new WaitForSeconds(0.1f);
+        fpc.enabled = true;
     }
 
     private void RespawnAgents()

@@ -15,10 +15,6 @@ public class Patrol : State
     public override void Enter()
     {
         base.Enter();
-        if (anim != null)
-        {
-            anim.SetTrigger("isWalking");
-        }
         agent.speed = 3;
         agent.isStopped = false;        
     }
@@ -33,7 +29,6 @@ public class Patrol : State
         }
         else if (agent.remainingDistance < 1 && !agent.pathPending)
         {
-            //currentIndex = (currentIndex + 1) % LevelManager.Instance.Waypoints.Count;
             currentIndex= Random.Range(0, LevelManager.Instance.PatrolPoints.Count-1);
             agent.SetDestination(LevelManager.Instance.PatrolPoints[currentIndex].transform.position);
         }  
@@ -45,10 +40,6 @@ public class Patrol : State
     }
     public override void Exit() 
     {
-        if (anim != null)
-        {
-            anim.ResetTrigger("isWalking");
-        }
         base.Exit();
     }
 }

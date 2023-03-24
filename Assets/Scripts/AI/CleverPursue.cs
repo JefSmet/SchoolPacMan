@@ -25,13 +25,18 @@ public class CleverPursue : State
     {
         base.Update();
 
-        if (CanAttackPlayer())
-        {
-            nextState = new Attack(npc, agent, anim, player, audioSource);
-            stage = EVENT.EXIT;
-            return;
-        }
-
+        //if (CanAttackPlayer())
+        //{
+        //    nextState = new Attack(npc, agent, anim, player, audioSource);
+        //    stage = EVENT.EXIT;
+        //    return;
+        //}
+        //else if (!CanSeePlayer()) 
+        //{
+        //    nextState = new Patrol(npc,agent, anim, player, audioSource);
+        //    stage= EVENT.EXIT; 
+        //    return;
+        //}
         //the vector from the agent to the target
         Vector3 targetDir = player.position - npc.transform.position;
 
