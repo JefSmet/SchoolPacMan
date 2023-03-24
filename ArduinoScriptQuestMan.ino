@@ -8,6 +8,7 @@ void setup() {
 	Serial.begin(9600);
 	
 	pinMode(A0, INPUT);			// Potentio
+	pinMode(6, OUTPUT);			// Buzzer
 	pinMode(9, INPUT_PULLUP); 	// Button
 	pinMode(10, OUTPUT); 		// Red LED
 	pinMode(12, OUTPUT); 		// Green LED
@@ -22,12 +23,14 @@ void loop() {
 		serialInputChar = Serial.read();
 		if (serialInputChar == 'I') {
 			digitalWrite(12, HIGH);
+			tone(6, 500, 100); // Play a high tone on pin 6 for 1 second
 		}
 		if (serialInputChar == 'O') {
 			digitalWrite(12, LOW);
 		}
 		if (serialInputChar == 'A'){
 			digitalWrite(10, HIGH);
+			tone(6, 100, 100); // Play a low tone on pin 6 for 1 second
 		}
 		if (serialInputChar == 'U'){
 			digitalWrite(10, LOW);
