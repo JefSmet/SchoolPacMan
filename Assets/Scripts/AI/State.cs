@@ -96,19 +96,24 @@ public class State
 
     public bool CanSeePlayer()
     {
-        Vector3 direction = player.position- npc.transform.position;
-        float angle = Vector3.Angle(direction, npc.transform.forward);
 
-        if ((direction.magnitude < visDist) && (angle < visAngle))
-        {           
+        Vector3 direction = (player.position - npc.transform.position).normalized;
+        float maxDistance = Vector3.Distance(player.position, npc.transform.position);
+
+
+        float lookingAngle = Vector3.Angle(npc.transform.forward, direction);
+        if ((maxDistance < visDist) && (lookingAngle < visAngle))
+        {
             LayerMask mask = LayerMask.GetMask("Wall");
-            // Check if a Wall is hit.
-            if (Physics.Raycast(npc.transform.position, npc.transform.forward, direction.magnitude, mask))
+            RaycastHit hit;
+
+            if (Physics.Raycast(npc.transform.position, direction, out hit, maxDistance, mask))
             {
                 return false;
             }
             return true;
         }
+
         return false;
     }
 
