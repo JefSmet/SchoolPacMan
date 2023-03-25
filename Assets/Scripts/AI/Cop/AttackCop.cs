@@ -8,7 +8,7 @@ public class AttackCop : State
     float rotationSpeed = 2f;
 
     public AttackCop(GameObject npc, NavMeshAgent agent, Animator anim, UnityEngine.Transform player, AudioSource audioSource) : base(npc, agent, anim, player, audioSource)
-    {
+    {        
         name = STATE.ATTACK;
     }
 
@@ -16,10 +16,8 @@ public class AttackCop : State
     {
         base.Enter();
         agent.isStopped = true;
-        if (audioSource != null)
-        {
-            audioSource.Play();
-        }
+        AudioManager.Instance.audioSource.clip = audioSource.clip;
+        AudioManager.Instance.audioSource.Play();
     }
 
     public override void Update()
@@ -47,7 +45,7 @@ public class AttackCop : State
     {
         if (audioSource != null)
         {
-            audioSource.Stop();
+         //   audioSource.Stop();
         }
         base.Exit();
     }

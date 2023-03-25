@@ -8,8 +8,8 @@ public class FootstepSound : MonoBehaviour
 
     public float minSpeedForFootstepSounds = 1f;
     public float maxSpeedForFootstepSounds = 10f;
-    public float minPitch = 0.8f;
-    public float maxPitch = 1.2f;
+    public float minPitch = 1.5f;
+    public float maxPitch = 3f;
 
     private AudioSource audioSource;
     private CharacterController characterController;
@@ -34,8 +34,12 @@ public class FootstepSound : MonoBehaviour
 
     private void PlayFootstepSound()
     {
+        if (audioSource.isPlaying)
+        {
+            return;
+        }
         RaycastHit hit;
-        Physics.Raycast(transform.position, Vector3.down, out hit);
+        Physics.Raycast(transform.position+Vector3.up, Vector3.down, out hit);
 
         if (hit.collider != null)
         {
@@ -43,10 +47,10 @@ public class FootstepSound : MonoBehaviour
 
             switch (tag)
             {
-                case "floor":
+                case "Floor":
                     audioSource.clip = floorFootstepSounds[Random.Range(0, floorFootstepSounds.Length)];
                     break;
-                case "table":
+                case "Table":
                     audioSource.clip = tableFootstepSounds[Random.Range(0, tableFootstepSounds.Length)];
                     break;                
             }

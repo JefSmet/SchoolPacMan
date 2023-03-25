@@ -16,10 +16,8 @@ public class AttackDoctor : State
     {        
         base.Enter();
         agent.isStopped = true;
-        if (audioSource != null)
-        {
-            audioSource.Play();
-        }
+        AudioManager.Instance.audioSource.clip = audioSource.clip;
+        AudioManager.Instance.audioSource.Play();
     }
 
     public override void Update()
@@ -44,7 +42,7 @@ public class AttackDoctor : State
     {
         if (audioSource != null)
         {
-            audioSource.Stop();
+        //    audioSource.Stop();
         }
         base.Exit();
     }

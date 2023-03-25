@@ -16,7 +16,8 @@ public class AttackSanta : State
     {        
         base.Enter();
         agent.isStopped = true;
-        AudioManager.Instance.Play("AttackPunch");
+        AudioManager.Instance.audioSource.clip = audioSource.clip;
+        AudioManager.Instance.audioSource.Play();
     }
 
     public override void Update()
@@ -44,7 +45,7 @@ public class AttackSanta : State
     {
         if (audioSource != null)
         {
-            audioSource.Stop();
+        //    audioSource.Stop();
         }
         base.Exit();
     }
