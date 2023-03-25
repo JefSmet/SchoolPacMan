@@ -26,4 +26,14 @@ public class AiDoctor : MonoBehaviour
     {
         currentState = currentState.Process();
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.tag == "Studiepunt")
+        {
+            LevelManager.Instance.RespawnAgent(gameObject);
+            AudioManager.Instance.audioSource.clip=audioSource.clip;
+            AudioManager.Instance.audioSource.Play();
+        }
+    }
 }

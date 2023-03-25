@@ -45,9 +45,9 @@ public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
         agents.AddRange(GameObject.FindGameObjectsWithTag("AI"));
         player = GameObject.FindGameObjectWithTag("Player");
         //fpc = player.GetComponent<FirstPersonController>();
-        locomotionSystem= GetComponent<LocomotionSystem>();
-        teleportationProvider= GetComponent<TeleportationProvider>();
-        snapTurnProvider = GetComponent<ActionBasedSnapTurnProvider>();
+        locomotionSystem= player.GetComponent<LocomotionSystem>();
+        teleportationProvider= player.GetComponent<TeleportationProvider>();
+        snapTurnProvider = player.GetComponent<ActionBasedSnapTurnProvider>();
         RespawnPlayer();
         RespawnAgents();
     }
@@ -85,11 +85,15 @@ public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
 
         foreach (GameObject agent in agents)
         {
-            NavMeshAgent nma = agent.GetComponent<NavMeshAgent>();
-            nma.enabled = false;
-            agent.transform.position = aiSpawn.position;
-            nma.enabled = true;
+            RespawnAgent(agent);
         }
+    }
+    public void RespawnAgent(GameObject agent)
+    {
+        NavMeshAgent nma = agent.GetComponent<NavMeshAgent>();
+        nma.enabled = false;
+        agent.transform.position = aiSpawn.position;
+        nma.enabled = true;
     }
 
     private void OnEnable()
