@@ -76,4 +76,9 @@ public class GameManager : SingletonPersistent<GameManager>
         
         SceneManager.LoadScene("NextLevel");
     }
+
+    public void StartGame()
+    {
+        SceneManager.LoadScene("LevelDemo");
+    }
 }
