@@ -5,15 +5,14 @@ using UnityEngine;
 
 public class AudioManager : SingletonPersistent<AudioManager>
 {
-    // Start is called before the first frame update
-    void Start()
+
+    public AudioSource audioSource;
+
+
+    private void Start()
     {
-        
+        audioSource = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }

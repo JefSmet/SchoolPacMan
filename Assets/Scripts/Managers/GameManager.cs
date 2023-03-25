@@ -13,14 +13,14 @@ public class GameManager : SingletonPersistent<GameManager>
     [SerializeField]GameObject _arduinoControllerPrefab;
     [SerializeField]LevelManager _levelManager;
     SerialCommThreaded _arduinoController;
-    HUDController _hudController;
+    
     public int GameScore { get; set; }
     private int lives;
 
     public int Lives
     {
         get { return lives; }
-        set { lives = value; if (lives > -1) _hudController.SetLivesText(lives); else { Defeat(); } }
+        set { lives = value; if (lives < 0) Defeat() ; }
     }
 
     private void Defeat()
@@ -33,24 +33,7 @@ public class GameManager : SingletonPersistent<GameManager>
         SceneManager.LoadScene("Victory");
     }
 
-    public HUDController HudController
-    { 
-        get 
-        {  
-            if (_hudController == null)
-            {                
-                if (_hudControllerPrefab == null)
-                {
-                    _hudController = gameObject.AddComponent<HUDController>();
-                }
-                else
-                {
-                    _hudController = _hudControllerPrefab.GetComponent<HUDController>();
-                }
-            }   
-            return _hudController;
-        }
-    }
+
     public SerialCommThreaded ArduinoController 
     {
         get
@@ -83,22 +66,14 @@ public class GameManager : SingletonPersistent<GameManager>
 
     private void Start()
     {
-        FirstPersonController fpc = GameObject.FindObjectOfType<FirstPersonController>();
-        if (fpc != null) 
-        {
-            _hudController.SetPlayerSpeedText(fpc.MoveSpeed);
-        }
+        
+       
         Lives = 3;
     }
 
     public void LoadNextLevel()
     {
-        HudController.gameObject.SetActive(false);
+        
         SceneManager.LoadScene("NextLevel");
-    }
-
-    public void StartGame()
-    {
-        SceneManager.LoadScene("LevelDemo");
     }
 }

@@ -80,8 +80,7 @@ namespace StarterAssets
 			float speed = value;
 			speed = speed.Remap(0, 1023, 1, 10);
 			MoveSpeed = speed;
-			SprintSpeed= speed*1.5f;
-			GameManager.Instance.HudController.SetPlayerSpeedText(speed);
+			SprintSpeed= speed*1.5f;			
 		}
 
         private void OnEnable()
