@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class Patrol : State
 {
-    int currentIndex = 0;
+    private int currentIndex = 0;
 
     public Patrol(GameObject npc, NavMeshAgent agent, Animator anim, Transform player, AudioSource audioSource) : base(npc, agent, anim, player, audioSource)
     {

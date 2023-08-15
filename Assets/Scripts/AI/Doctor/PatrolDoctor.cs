@@ -5,9 +5,9 @@ using UnityEngine.AI;
 
 public class PatrolDoctor : State
 {
-    int currentIndex = 0;
-    float visDist = 30.0f;
-    float visAngle = 90f;
+    private int currentIndex = 0;
+    private float visDist = 30.0f;
+    private float visAngle = 90f;
 
     public PatrolDoctor(GameObject npc, NavMeshAgent agent, Animator anim, Transform player, AudioSource audioSource) : base(npc, agent, anim, player, audioSource)
     {

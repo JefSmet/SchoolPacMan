@@ -8,20 +8,20 @@ using System.Collections;
 
 public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
 {
-    [SerializeField] int ballValue = 5;
-    [SerializeField] Color ballColor = Color.green;
-    [SerializeField] int superballValue = 10;
-    [SerializeField] Color superballColor = Color.red;
-    [SerializeField] float percentageSuperballs = 20f;
-    List<GameObject> patrolpoints = new List<GameObject>();
-    List<GameObject> runAwayPoints = new List<GameObject>();
-    List<GameObject> hidingPoints = new List<GameObject>();
-    List<Studiepunt> studiepunten = new List<Studiepunt>();
-    List<GameObject> agents = new List<GameObject>();
-    GameObject player;
-    FirstPersonController fpc;
-    Transform aiSpawn;
-    Transform playerSpawn;
+    [SerializeField] private int ballValue = 5;
+    [SerializeField] private Color ballColor = Color.green;
+    [SerializeField] private int superballValue = 10;
+    [SerializeField] private Color superballColor = Color.red;
+    [SerializeField] private float percentageSuperballs = 20f;
+    private List<GameObject> patrolpoints = new List<GameObject>();
+    private List<GameObject> runAwayPoints = new List<GameObject>();
+    private List<GameObject> hidingPoints = new List<GameObject>();
+    private List<Studiepunt> studiepunten = new List<Studiepunt>();
+    private List<GameObject> agents = new List<GameObject>();
+    private GameObject player;
+    private FirstPersonController fpc;
+    private Transform aiSpawn;
+    private Transform playerSpawn;
 
     public List<GameObject> PatrolPoints { get { return patrolpoints; } }
     public List<Studiepunt> Studiepunten { get { return studiepunten; } }
@@ -56,7 +56,7 @@ public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
         GameManager.Instance.Lives -= 1;
         RespawnPlayer();
         RespawnAgents();
-       
+
     }
 
     private void RespawnPlayer()
@@ -67,7 +67,7 @@ public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
     }
 
     IEnumerator respawnDelay()
-    {        
+    {
         yield return new WaitForSeconds(0.1f);
         fpc.enabled = true;
     }

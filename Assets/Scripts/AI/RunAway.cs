@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class RunAway : State
 {
-    int currentIndex = 0;    
+    private int currentIndex = 0;    
     public RunAway(GameObject npc, NavMeshAgent agent, Animator anim, Transform player, AudioSource audioSource) : base(npc, agent, anim, player, audioSource)
     {
         name = STATE.RUNAWAY;

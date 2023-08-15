@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DisableRendererOnStart : MonoBehaviour
 {
-    Renderer rend;
+    private Renderer rend;
     // Start is called before the first frame update
     void Start()
     {

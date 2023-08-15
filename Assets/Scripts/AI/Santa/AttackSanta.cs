@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class AttackSanta : State
 {
-    float rotationSpeed = 2f;
+    private float rotationSpeed = 2f;
 
     public AttackSanta(GameObject npc, NavMeshAgent agent, Animator anim, UnityEngine.Transform player, AudioSource audioSource) : base(npc, agent, anim, player, audioSource)
     {

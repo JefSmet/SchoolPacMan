@@ -7,8 +7,8 @@ namespace QuestMan.Singleton
     public class Singleton<T> : MonoBehaviour
         where T : Component
     {
-        static readonly object Instancelock = new object();
-        static T _instance;
+        private static readonly object Instancelock = new object();
+        private static T _instance;
         public static T Instance
         {   // Double checked locking approach for Thread-safe Singleton Design Pattern in C#.
             // see: https://dotnettutorials.net/lesson/thread-safe-singleton-design-pattern/

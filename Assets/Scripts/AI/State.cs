@@ -25,9 +25,9 @@ public class State
     protected NavMeshAgent agent;
     protected AudioSource audioSource;
 
-    float visDist = 10.0f;
-    float visAngle = 67.5f;
-    float attackDistance = 2.0f;
+    private float visDist = 10.0f;
+    private float visAngle = 67.5f;
+    private float attackDistance = 2.0f;
     
     public State(GameObject npc, NavMeshAgent agent, Animator anim, Transform player,AudioSource audioSource)
     {

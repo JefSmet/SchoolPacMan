@@ -3,7 +3,7 @@ using UnityEngine.AI;
 
 internal class FleeDoctor : State
 {
-    float stopFleeingDistance = 20.0f;
+    private float stopFleeingDistance = 20.0f;
 
     public FleeDoctor(GameObject npc, NavMeshAgent agent, Animator anim, Transform player, AudioSource audioSource) : base(npc, agent, anim, player, audioSource)
     {

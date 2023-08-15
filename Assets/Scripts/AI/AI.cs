@@ -5,15 +5,15 @@ using UnityEngine.AI;
 
 public class AI : MonoBehaviour
 {
-    NavMeshAgent agent;
-    Animator animator;
+    private NavMeshAgent agent;
+    private Animator animator;
+    private State currentState;
+    private AudioSource audioSource; 
+    
     public Transform player;
-    State currentState;
-    AudioSource audioSource; 
-    //bool arduinoButtonPressed = false;
 
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         agent= GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
@@ -22,7 +22,7 @@ public class AI : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
         currentState = currentState.Process();
     }

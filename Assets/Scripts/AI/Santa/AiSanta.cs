@@ -5,12 +5,12 @@ using UnityEngine.AI;
 
 public class AiSanta : MonoBehaviour
 {
-    NavMeshAgent agent;
-    Animator animator;
+    private NavMeshAgent agent;
+    private Animator animator;
+    private State currentState;
+    private AudioSource audioSource;
+    
     public Transform player;
-    State currentState;
-    AudioSource audioSource;
-    //bool arduinoButtonPressed = false;
 
     // Start is called before the first frame update
     void Start()

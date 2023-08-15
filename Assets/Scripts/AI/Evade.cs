@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class Evade : State
 {
-    float distancePlayerStopEvade = 3.0f;
+    private float distancePlayerStopEvade = 3.0f;
     public Evade(GameObject npc, NavMeshAgent agent, Animator anim, Transform player, AudioSource audioSource) : base(npc, agent, anim, player, audioSource)
     {
         name = STATE.EVADE;

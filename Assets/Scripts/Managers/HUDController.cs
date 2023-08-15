@@ -7,17 +7,17 @@ using StarterAssets;
 public class HUDController : MonoBehaviour 
 {
     
-    [SerializeField] TextMeshProUGUI _spText;
-    [SerializeField] TextMeshProUGUI _ballsToGoText;
-    [SerializeField] TextMeshProUGUI _playerSpeedText;
-    [SerializeField] TextMeshProUGUI _livesText;
+    [SerializeField] private TextMeshProUGUI _spText;
+    [SerializeField] private TextMeshProUGUI _ballsToGoText;
+    [SerializeField] private TextMeshProUGUI _playerSpeedText;
+    [SerializeField] private TextMeshProUGUI _livesText;
 
-    [SerializeField] string captionSP = "Studiepunten: ";
-    [SerializeField] string captionBallsToGo = "StudieBallen te gaan: ";
-    [SerializeField] string captionPlayerSpeed = "Loopsnelheid: ";
-    [SerializeField] string captionLives = "Levens: ";
+    [SerializeField] private string captionSP = "Studiepunten: ";
+    [SerializeField] private string captionBallsToGo = "StudieBallen te gaan: ";
+    [SerializeField] private string captionPlayerSpeed = "Loopsnelheid: ";
+    [SerializeField] private string captionLives = "Levens: ";
 
-    FirstPersonController _firstPersonController;
+    private FirstPersonController _firstPersonController;
 
     private void OnEnable()
     {

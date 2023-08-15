@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class AttackCop : State
 {
-    float rotationSpeed = 2f;
+    private float rotationSpeed = 2f;
 
     public AttackCop(GameObject npc, NavMeshAgent agent, Animator anim, UnityEngine.Transform player, AudioSource audioSource) : base(npc, agent, anim, player, audioSource)
     {        

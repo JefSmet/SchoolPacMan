@@ -7,12 +7,12 @@ using static UnityEditor.PlayerSettings;
 public class BallSpawner : MonoBehaviour
 {
     
-    [SerializeField] GameObject _startBall;
-    [SerializeField] GameObject _endBall;
-    [SerializeField] GameObject _ballPrefab;
-    [SerializeField] float _colliderRadius = 2f;
-    [SerializeField] [MinAttribute(2)] int _ballCount=2;
-    [SerializeField] bool _showCollidergizmo = false;
+    [SerializeField] private GameObject _startBall;
+    [SerializeField] private GameObject _endBall;
+    [SerializeField] private GameObject _ballPrefab;
+    [SerializeField] private float _colliderRadius = 2f;
+    [SerializeField] [MinAttribute(2)] private int _ballCount=2;
+    [SerializeField] private bool _showCollidergizmo = false;
 
     void Awake()
     {

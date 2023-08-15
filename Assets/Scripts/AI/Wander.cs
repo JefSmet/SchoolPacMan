@@ -5,10 +5,10 @@ using UnityEngine.AI;
 
 public class Wander : State
 {    
-    float wanderRadius = 10;
-    float wanderDistance = 10;
-    float wanderJitter = 1;
-    Vector3 wanderTarget = Vector3.zero;
+    private float wanderRadius = 10;
+    private float wanderDistance = 10;
+    private float wanderJitter = 1;
+    private Vector3 wanderTarget = Vector3.zero;
     public Wander(GameObject npc, NavMeshAgent agent, Animator anim, Transform player, AudioSource audioSource) : base(npc, agent, anim, player, audioSource)
     {
         name = STATE.WANDER;

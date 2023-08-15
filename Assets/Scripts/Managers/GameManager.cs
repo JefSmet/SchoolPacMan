@@ -9,13 +9,13 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : SingletonPersistent<GameManager>
 {
-    [SerializeField]GameObject _hudControllerPrefab;
-    [SerializeField]GameObject _arduinoControllerPrefab;
-    [SerializeField]LevelManager _levelManager;
-    SerialCommThreaded _arduinoController;
-    HUDController _hudController;
-    public int GameScore { get; set; }
+    [SerializeField] private GameObject _hudControllerPrefab;
+    [SerializeField] private GameObject _arduinoControllerPrefab;
+    [SerializeField] private LevelManager _levelManager;
+    private SerialCommThreaded _arduinoController;
+    private HUDController _hudController;
     private int lives;
+    public int GameScore { get; set; }
 
     public int Lives
     {

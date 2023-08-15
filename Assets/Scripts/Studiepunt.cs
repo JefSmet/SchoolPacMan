@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Studiepunt : MonoBehaviour
 {
-    [SerializeField] int _value = 5;
+    [SerializeField] private int _value = 5;
 
     public int Value
     {
