@@ -69,6 +69,7 @@ public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
     IEnumerator respawnDelay()
     {
         yield return new WaitForSeconds(0.1f);
+        if (fpc!=null) 
         fpc.enabled = true;
     }
 

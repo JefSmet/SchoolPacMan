@@ -20,7 +20,7 @@ public class GameManager : SingletonPersistent<GameManager>
     public int Lives
     {
         get { return lives; }
-        set { lives = value; if (lives > -1) _hudController.SetLivesText(lives); else { Defeat(); } }
+        set { lives = value; if (lives > -1) HudController.SetLivesText(lives); else { Defeat(); } }
     }
 
     private void Defeat()
@@ -72,23 +72,33 @@ public class GameManager : SingletonPersistent<GameManager>
     public LevelManager LevelManager 
     {
         get 
-        { 
+        {
             if (_levelManager == null)
             {
-                _levelManager= gameObject.AddComponent<LevelManager>();
+                HudController.gameObject.SetActive(true);
+                FirstPersonController fpc = GameObject.FindObjectOfType<FirstPersonController>();
+                if (fpc != null)
+                {
+                    HudController.SetPlayerSpeedText(fpc.MoveSpeed);
+                }
+                _levelManager = FindObjectOfType<LevelManager>();
             }
+
             return _levelManager; 
         } 
     }
 
     private void Start()
     {
-        FirstPersonController fpc = GameObject.FindObjectOfType<FirstPersonController>();
-        if (fpc != null) 
+        if (SceneManager.GetActiveScene().name.Equals("BootScene"))
         {
-            _hudController.SetPlayerSpeedText(fpc.MoveSpeed);
+            LoadSceneAfterDelay("StartScene");
         }
-        Lives = 3;
+        
+            
+            Lives = 3;
+        
+        
     }
 
     public void LoadNextLevel()
@@ -99,6 +109,26 @@ public class GameManager : SingletonPersistent<GameManager>
 
     public void StartGame()
     {
-        SceneManager.LoadScene("LevelDemo");
+        SceneManager.LoadScene("LevelDemo");        
+    }
+
+    public void LoadSettings()
+    {
+        SceneManager.LoadScene("Settings");
+    }
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
+    public void LoadSceneAfterDelay(string sceneName)
+    {
+        StartCoroutine(DelayedSceneLoad(sceneName));
+    }
+
+    IEnumerator DelayedSceneLoad(string sceneName)
+    {
+        yield return new WaitForSeconds(0.5f);
+        SceneManager.LoadScene(sceneName);
     }
 }
