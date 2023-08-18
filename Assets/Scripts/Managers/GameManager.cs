@@ -96,4 +96,9 @@ public class GameManager : SingletonPersistent<GameManager>
         HudController.gameObject.SetActive(false);
         SceneManager.LoadScene("NextLevel");
     }
+
+    public void StartGame()
+    {
+        SceneManager.LoadScene("LevelDemo");
+    }
 }
