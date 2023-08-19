@@ -8,7 +8,7 @@ public class AiSanta : MonoBehaviour
     private NavMeshAgent agent;
     private Animator animator;
     private State currentState;
-    private AudioSource audioSource;
+    private AudioSource audioSource;    
     
     public Transform player;
 

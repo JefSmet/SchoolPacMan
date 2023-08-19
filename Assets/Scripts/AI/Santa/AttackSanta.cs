@@ -16,8 +16,9 @@ public class AttackSanta : State
     {        
         base.Enter();
         agent.isStopped = true;
-        AudioManager.Instance.audioSource.clip = audioSource.clip;
-        AudioManager.Instance.audioSource.Play();
+        AudioManager.Instance.sfx.clip = audioSource.clip;
+        AudioManager.Instance.sfx.Play();
+        npc.GetComponent<Santa>().SwitchEyeColor(Color.red);
     }
 
     public override void Update()

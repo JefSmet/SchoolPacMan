@@ -9,15 +9,15 @@ public class StartScreenManager : MonoBehaviour
 {
     public void StartGame()
     {
-        SceneManager.LoadScene("LevelDemo");
+        GameManager.Instance.StartGame();
     }
 
     public void LoadSettings()
     {
-        SceneManager.LoadScene("Settings");
+        GameManager.Instance.LoadScene("Settings");
     }
     public void QuitGame()
     {
-        Application.Quit();
+        GameManager.Instance.QuitGame();
     }
 }

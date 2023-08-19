@@ -6,13 +6,13 @@ using UnityEngine;
 public class AudioManager : SingletonPersistent<AudioManager>
 {
 
-    public AudioSource audioSource;
+    public AudioSource sfx;
     private Transform ambientMusicTransform;
     public AudioSource ambientMusic;
 
     private void Start()
     {
-        audioSource = GetComponent<AudioSource>();
+        sfx = GetComponent<AudioSource>();
         ambientMusicTransform = transform.Find("Ambient music");
         ambientMusic= ambientMusicTransform.GetComponent<AudioSource>();
     }
@@ -32,5 +32,15 @@ public class AudioManager : SingletonPersistent<AudioManager>
         {
             Debug.LogError("ambientMusic is niet geïnitialiseerd!");
         }
+    }
+
+    public void SetVolumeSFX(float value)
+    {
+        sfx.volume = value;
+    }
+
+    public void SetVolumeMusic(float value)
+    {
+        ambientMusic.volume = value;
     }
 }

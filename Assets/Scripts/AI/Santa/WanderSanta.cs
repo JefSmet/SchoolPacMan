@@ -9,6 +9,7 @@ public class WanderSanta : State
     private float wanderDistance = 10;
     private float wanderJitter = 2;
     private Vector3 wanderTarget = Vector3.zero;
+    
 
     public WanderSanta(GameObject npc, NavMeshAgent agent, Animator anim, Transform player, AudioSource audioSource) : base(npc, agent, anim, player, audioSource)
     {
@@ -20,6 +21,7 @@ public class WanderSanta : State
         base.Enter();
         agent.speed = 2f;
         agent.isStopped = false;
+        npc.GetComponent<Santa>().SwitchEyeColor(Color.black);
     }
 
     public override void Update()

@@ -24,6 +24,7 @@ public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
     private Transform aiSpawn;
     private Transform playerSpawn;
     [SerializeField] private GameObject _pauseMenu;
+    [SerializeField] private GameObject _settingsMenu;
 
     public List<GameObject> PatrolPoints { get { return patrolpoints; } }
     public List<Studiepunt> Studiepunten { get { return studiepunten; } }
@@ -187,6 +188,17 @@ public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
 
         // Verberg het pauzemenu
         HidePauseMenu();
+    }
+
+    public void ShowSettings()
+    {
+        HidePauseMenu();
+        _settingsMenu.SetActive(true);
+    }
+
+    public void HideSettings()
+    {
+        _settingsMenu.SetActive(false);
     }
 
     public void Pause()

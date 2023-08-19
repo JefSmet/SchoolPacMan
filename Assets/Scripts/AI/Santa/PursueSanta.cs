@@ -16,6 +16,7 @@ public class PursueSanta : State
         base.Enter();
         agent.speed = 10;
         agent.isStopped = false;
+        npc.GetComponent<Santa>().SwitchEyeColor(Color.red);
     }
 
     public override void Update()

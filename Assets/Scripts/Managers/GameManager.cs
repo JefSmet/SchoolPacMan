@@ -12,8 +12,10 @@ public class GameManager : SingletonPersistent<GameManager>
 {
     [SerializeField] private GameObject _hudControllerPrefab;
     [SerializeField] private GameObject _arduinoControllerPrefab;
+    [SerializeField] private DataStorage _dataStorage;
     [SerializeField] private LevelManager _levelManager;
-    
+   
+
     private SerialCommThreaded _arduinoController;
     private HUDController _hudController;
     private int lives;
@@ -96,9 +98,15 @@ public class GameManager : SingletonPersistent<GameManager>
 
     private void Start()
     {
+        GameData gameData = _dataStorage.LoadGameData();
+        if (gameData != null)
+        {
+            AudioManager.Instance.SetVolumeSFX(gameData.sfxVolume);
+            AudioManager.Instance.SetVolumeMusic(gameData.musicVolume);
+        }
         if (SceneManager.GetActiveScene().name.Equals("BootScene"))
         {
-            LoadSceneAfterDelay("StartScene");
+            LoadSceneAfterDelay("MainMenu");
         }
         
             
@@ -124,6 +132,7 @@ public class GameManager : SingletonPersistent<GameManager>
     }
     public void QuitGame()
     {
+        _dataStorage.SaveGameData(AudioManager.Instance.sfx.volume,AudioManager.Instance.ambientMusic.volume);
         Application.Quit();
     }
     
@@ -138,8 +147,11 @@ public class GameManager : SingletonPersistent<GameManager>
         SceneManager.LoadScene(sceneName);
     }
 
-
     
+    public string CurrentScene()
+    {
+        return SceneManager.GetActiveScene().name;
+    }
 
 
  

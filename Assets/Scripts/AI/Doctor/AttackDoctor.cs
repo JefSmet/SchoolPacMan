@@ -16,8 +16,8 @@ public class AttackDoctor : State
     {        
         base.Enter();
         agent.isStopped = true;
-        AudioManager.Instance.audioSource.clip = audioSource.clip;
-        AudioManager.Instance.audioSource.Play();
+        AudioManager.Instance.sfx.clip = audioSource.clip;
+        AudioManager.Instance.sfx.Play();
     }
 
     public override void Update()
