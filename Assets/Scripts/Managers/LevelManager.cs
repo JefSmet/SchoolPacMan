@@ -20,8 +20,10 @@ public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
     private List<GameObject> agents = new List<GameObject>();
     private GameObject player;
     private FirstPersonController fpc;
+    private PlayerInput playerInput;
     private Transform aiSpawn;
     private Transform playerSpawn;
+    [SerializeField] private GameObject _pauseMenu;
 
     public List<GameObject> PatrolPoints { get { return patrolpoints; } }
     public List<Studiepunt> Studiepunten { get { return studiepunten; } }
@@ -46,6 +48,8 @@ public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
         agents.AddRange(GameObject.FindGameObjectsWithTag("AI"));
         player = GameObject.FindGameObjectWithTag("Player");
         fpc = player.GetComponent<FirstPersonController>();
+        playerInput = player.GetComponent<PlayerInput>();
+        AudioManager.Instance.PlayAmbientMusic();
         RespawnPlayer();
         RespawnAgents();
     }
@@ -105,7 +109,7 @@ public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
         GameManager.Instance.ArduinoController.Blink(GetStudiepuntLight(sp));
         if (GetActiveStudiepunten() == 0)
         {
-            GameManager.Instance.LoadNextLevel();
+            GameManager.Instance.LoadScene("NextLevel");
         }
     }
 
@@ -167,5 +171,54 @@ public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
         studiepunt.Value = value;
         Renderer rend = studiepunt.GetComponent<Renderer>();
         rend.material.color = color;
+    }
+
+
+    public void Resume()
+    {
+        Time.timeScale = 1f;
+
+        // Reactiveren van de "look" action
+        playerInput.actions["look"].Enable();
+
+        // Verberg de cursor en laat het terug functioneren als het rondkijken
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+
+        // Verberg het pauzemenu
+        HidePauseMenu();
+    }
+
+    public void Pause()
+    {
+        Time.timeScale = 0f;
+
+        // Deactiveren van de "look" action
+        playerInput.actions["look"].Disable();
+
+        // Maak de cursor zichtbaar en zet deze vast
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+
+        // Toon het pauzemenu
+        ShowPauseMenu();
+    }
+
+    public void LoadMainMenu()
+    {
+        Time.timeScale = 1f;
+        AudioManager.Instance.StopAmbientMusic();
+        GameManager.Instance.LoadScene("MainMenu");
+    }
+
+
+    public void ShowPauseMenu()
+    {
+        _pauseMenu.SetActive(true);
+    }
+
+    public void HidePauseMenu()
+    {
+        _pauseMenu.SetActive(false);
     }
 }

@@ -288,7 +288,7 @@ GameObject:
   - component: {fileID: 941899348}
   - component: {fileID: 941899347}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: BootCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -383,13 +383,25 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1558457684, guid: 62efdd4fdc8dbe346a7725b6976a31de, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1558457684, guid: 62efdd4fdc8dbe346a7725b6976a31de, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1558457684, guid: 62efdd4fdc8dbe346a7725b6976a31de, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1558457684, guid: 62efdd4fdc8dbe346a7725b6976a31de, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5255313645735331724, guid: 62efdd4fdc8dbe346a7725b6976a31de, type: 3}
       propertyPath: m_Name
       value: GameManager (persistent)
-      objectReference: {fileID: 0}
-    - target: {fileID: 5255313645735331725, guid: 62efdd4fdc8dbe346a7725b6976a31de, type: 3}
-      propertyPath: _levelManager
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5255313645735331726, guid: 62efdd4fdc8dbe346a7725b6976a31de, type: 3}
       propertyPath: m_RootOrder

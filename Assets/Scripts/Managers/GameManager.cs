@@ -6,15 +6,19 @@ using QuestMan.Singleton;
 using StarterAssets;
 using System;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class GameManager : SingletonPersistent<GameManager>
 {
     [SerializeField] private GameObject _hudControllerPrefab;
     [SerializeField] private GameObject _arduinoControllerPrefab;
     [SerializeField] private LevelManager _levelManager;
+    
     private SerialCommThreaded _arduinoController;
     private HUDController _hudController;
     private int lives;
+
+    
     public int GameScore { get; set; }
 
     public int Lives
@@ -88,6 +92,8 @@ public class GameManager : SingletonPersistent<GameManager>
         } 
     }
 
+   
+
     private void Start()
     {
         if (SceneManager.GetActiveScene().name.Equals("BootScene"))
@@ -101,10 +107,10 @@ public class GameManager : SingletonPersistent<GameManager>
         
     }
 
-    public void LoadNextLevel()
+    public void LoadScene(string sceneName)
     {
         HudController.gameObject.SetActive(false);
-        SceneManager.LoadScene("NextLevel");
+        SceneManager.LoadScene(sceneName);
     }
 
     public void StartGame()
@@ -120,7 +126,7 @@ public class GameManager : SingletonPersistent<GameManager>
     {
         Application.Quit();
     }
-
+    
     public void LoadSceneAfterDelay(string sceneName)
     {
         StartCoroutine(DelayedSceneLoad(sceneName));
@@ -131,4 +137,10 @@ public class GameManager : SingletonPersistent<GameManager>
         yield return new WaitForSeconds(0.5f);
         SceneManager.LoadScene(sceneName);
     }
+
+
+    
+
+
+ 
 }
