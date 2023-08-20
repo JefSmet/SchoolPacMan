@@ -17,11 +17,17 @@ public class HUDController : MonoBehaviour
     [SerializeField] private string captionPlayerSpeed = "Loopsnelheid: ";
     [SerializeField] private string captionLives = "Levens: ";
 
-    private FirstPersonController _firstPersonController;
+    
 
     private void OnEnable()
     {
-        
+        LevelManager.Instance.fpc.OnMoveSpeedChanged+=SetPlayerSpeedText;
+        GameManager.Instance.onLivesChanged += SetLivesText;
+    }
+    private void OnDisable()
+    {
+        LevelManager.Instance.fpc.OnMoveSpeedChanged -= SetPlayerSpeedText;
+        GameManager.Instance.onLivesChanged -= SetLivesText;
     }
     public void SetSPText(int studiepunten)
     {
@@ -43,4 +49,10 @@ public class HUDController : MonoBehaviour
         _livesText.text = captionLives + lives;
     }
 
+
+    private void Start()
+    {
+        
+        SetPlayerSpeedText(LevelManager.Instance.fpc.MoveSpeed);
+    }
 }

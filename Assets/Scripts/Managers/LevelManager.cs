@@ -5,27 +5,34 @@ using UnityEngine.AI;
 using UnityEngine.InputSystem;
 using StarterAssets;
 using System.Collections;
+using UnityEngine.UI;
 
 public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
 {
+
     [SerializeField] private int ballValue = 5;
     [SerializeField] private Color ballColor = Color.green;
     [SerializeField] private int superballValue = 10;
     [SerializeField] private Color superballColor = Color.red;
     [SerializeField] private float percentageSuperballs = 20f;
+    [SerializeField] private GameObject _hudControllerPrefab;
+    private HUDController _hudController;
+
     private List<GameObject> patrolpoints = new List<GameObject>();
     private List<GameObject> runAwayPoints = new List<GameObject>();
     private List<GameObject> hidingPoints = new List<GameObject>();
     private List<Studiepunt> studiepunten = new List<Studiepunt>();
     private List<GameObject> agents = new List<GameObject>();
     private GameObject player;
-    private FirstPersonController fpc;
     private PlayerInput playerInput;
     private Transform aiSpawn;
     private Transform playerSpawn;
+    private float startSfxValue;
+    private float startMusicValue;
     [SerializeField] private GameObject _pauseMenu;
     [SerializeField] private GameObject _settingsMenu;
 
+    public FirstPersonController fpc;
     public List<GameObject> PatrolPoints { get { return patrolpoints; } }
     public List<Studiepunt> Studiepunten { get { return studiepunten; } }
 
@@ -33,8 +40,34 @@ public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
     public List<GameObject> HidingPoints { get { return hidingPoints; } }
     public int LevelScore { get; set; }
     public float PlayerMoveSpeed { get { return fpc.MoveSpeed; } }
+    public HUDController HudController
+    {
+        get
+        {
+            if (_hudController == null)
+            {
+                if (_hudControllerPrefab == null)
+                {
+                    _hudController = gameObject.AddComponent<HUDController>();
+                }
+                else
+                {
+                    _hudController = _hudControllerPrefab.GetComponent<HUDController>();
+                }
+            }
+            return _hudController;
+        }
+    }
     void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
+        fpc = player.GetComponent<FirstPersonController>();
+        _hudController = Instantiate(_hudControllerPrefab).GetComponent<HUDController>();
+        _hudController.transform.SetParent(transform, false);
+        startSfxValue = AudioManager.Instance.sfx.volume;
+        startMusicValue = AudioManager.Instance.ambientMusic.volume;
+        
+
         aiSpawn = GameObject.FindGameObjectWithTag("AISpawn").transform;
         playerSpawn = GameObject.FindGameObjectWithTag("PlayerSpawn").transform;
         patrolpoints.AddRange(GameObject.FindGameObjectsWithTag("PatrolPoint"));
@@ -43,12 +76,10 @@ public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
         studiepunten.AddRange(FindObjectsOfType<Studiepunt>());
         InitializeBalls();
         RandomizeSuperballs();
-        GameManager.Instance.HudController.SetSPText(0);
-        GameManager.Instance.HudController.SetBallsToGoText(GetActiveStudiepunten());
-        GameManager.Instance.HudController.SetLivesText(3);
+        HudController.SetSPText(0);
+        HudController.SetBallsToGoText(GetActiveStudiepunten());
+        HudController.SetLivesText(GameManager.Instance.Lives);
         agents.AddRange(GameObject.FindGameObjectsWithTag("AI"));
-        player = GameObject.FindGameObjectWithTag("Player");
-        fpc = player.GetComponent<FirstPersonController>();
         playerInput = player.GetComponent<PlayerInput>();
         AudioManager.Instance.PlayAmbientMusic();
         RespawnPlayer();
@@ -58,9 +89,18 @@ public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
 
     public void Die()
     {
-        GameManager.Instance.Lives -= 1;
-        RespawnPlayer();
-        RespawnAgents();
+        if (GameManager.Instance.Lives > 0)
+        {
+
+            GameManager.Instance.Lives -= 1;
+
+            RespawnPlayer();
+            RespawnAgents();
+        }
+        else
+        {
+            GameManager.Instance.Defeat();
+        }
 
     }
 
@@ -74,8 +114,8 @@ public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
     IEnumerator respawnDelay()
     {
         yield return new WaitForSeconds(0.1f);
-        if (fpc!=null) 
-        fpc.enabled = true;
+        if (fpc != null)
+            fpc.enabled = true;
     }
 
     private void RespawnAgents()
@@ -105,8 +145,8 @@ public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
         sp.gameObject.SetActive(false);
         LevelScore += sp.Value;
         GameManager.Instance.GameScore += sp.Value;
-        GameManager.Instance.HudController.SetSPText(LevelScore);
-        GameManager.Instance.HudController.SetBallsToGoText(GetActiveStudiepunten());
+        HudController.SetSPText(LevelScore);
+        HudController.SetBallsToGoText(GetActiveStudiepunten());
         GameManager.Instance.ArduinoController.Blink(GetStudiepuntLight(sp));
         if (GetActiveStudiepunten() == 0)
         {
@@ -233,4 +273,26 @@ public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
     {
         _pauseMenu.SetActive(false);
     }
+
+
+
+    
+    
+
+    public void Accept()
+    {
+
+        HideSettings();
+        ShowPauseMenu();
+
+    }
+
+    public void Cancel()
+    {
+        AudioManager.Instance.sfx.volume = startSfxValue;
+        AudioManager.Instance.ambientMusic.volume = startMusicValue;
+        Accept();
+    }
+
+   
 }

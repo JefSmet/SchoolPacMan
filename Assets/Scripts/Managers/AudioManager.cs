@@ -19,18 +19,14 @@ public class AudioManager : SingletonPersistent<AudioManager>
 
     public void StopAmbientMusic()
     {
-        ambientMusic.Stop();
+        ambientMusic.Pause();
     }
 
     public void PlayAmbientMusic()
     {
-        if (ambientMusic != null)
+        if (ambientMusic != null&& !ambientMusic.isPlaying)
         {
             ambientMusic.Play();
-        }
-        else
-        {
-            Debug.LogError("ambientMusic is niet geïnitialiseerd!");
         }
     }
 

@@ -82,9 +82,10 @@ namespace StarterAssets
 			speed = speed.Remap(0, 1023, 1, 10);
 			MoveSpeed = speed;
 			SprintSpeed= speed*1.5f;
-			OnMoveSpeedChanged?.Invoke(MoveSpeed);
-			GameManager.Instance.HudController.SetPlayerSpeedText(speed);
+			OnMoveSpeedChanged?.Invoke(MoveSpeed);			
 		}
+
+		
 
         private void OnEnable()
         {

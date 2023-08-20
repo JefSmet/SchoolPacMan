@@ -16,7 +16,7 @@ public class Studiepunt : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            GameManager.Instance.LevelManager.StudiepuntPickedUp(this);
+            LevelManager.Instance.StudiepuntPickedUp(this);
         }        
     }
 

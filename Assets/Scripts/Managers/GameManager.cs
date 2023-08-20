@@ -10,26 +10,32 @@ using UnityEngine.InputSystem;
 
 public class GameManager : SingletonPersistent<GameManager>
 {
-    [SerializeField] private GameObject _hudControllerPrefab;
+    public event Action<int> onLivesChanged;
     [SerializeField] private GameObject _arduinoControllerPrefab;
     [SerializeField] private DataStorage _dataStorage;
-    [SerializeField] private LevelManager _levelManager;
-   
+
 
     private SerialCommThreaded _arduinoController;
-    private HUDController _hudController;
+
     private int lives;
 
-    
+    public PlayerScoreList playerScores = new PlayerScoreList(new List<PlayerScore>());
     public int GameScore { get; set; }
 
     public int Lives
     {
-        get { return lives; }
-        set { lives = value; if (lives > -1) HudController.SetLivesText(lives); else { Defeat(); } }
+        get
+        {
+            return lives;
+        }
+        set
+        {
+            lives = value;
+            onLivesChanged?.Invoke(lives);
+        }
     }
 
-    private void Defeat()
+    public void Defeat()
     {
         SceneManager.LoadScene("Defeat");
     }
@@ -39,25 +45,8 @@ public class GameManager : SingletonPersistent<GameManager>
         SceneManager.LoadScene("Victory");
     }
 
-    public HUDController HudController
-    { 
-        get 
-        {  
-            if (_hudController == null)
-            {                
-                if (_hudControllerPrefab == null)
-                {
-                    _hudController = gameObject.AddComponent<HUDController>();
-                }
-                else
-                {
-                    _hudController = _hudControllerPrefab.GetComponent<HUDController>();
-                }
-            }   
-            return _hudController;
-        }
-    }
-    public SerialCommThreaded ArduinoController 
+
+    public SerialCommThreaded ArduinoController
     {
         get
         {
@@ -75,30 +64,14 @@ public class GameManager : SingletonPersistent<GameManager>
             return _arduinoController;
         }
     }
-    public LevelManager LevelManager 
-    {
-        get 
-        {
-            if (_levelManager == null)
-            {
-                HudController.gameObject.SetActive(true);
-                FirstPersonController fpc = GameObject.FindObjectOfType<FirstPersonController>();
-                if (fpc != null)
-                {
-                    HudController.SetPlayerSpeedText(fpc.MoveSpeed);
-                }
-                _levelManager = FindObjectOfType<LevelManager>();
-            }
 
-            return _levelManager; 
-        } 
-    }
 
-   
 
     private void Start()
     {
         GameData gameData = _dataStorage.LoadGameData();
+
+        playerScores = _dataStorage.LoadScores();
         if (gameData != null)
         {
             AudioManager.Instance.SetVolumeSFX(gameData.sfxVolume);
@@ -108,22 +81,18 @@ public class GameManager : SingletonPersistent<GameManager>
         {
             LoadSceneAfterDelay("MainMenu");
         }
-        
-            
-            Lives = 3;
-        
-        
+
+        Lives = 3;
     }
 
     public void LoadScene(string sceneName)
     {
-        HudController.gameObject.SetActive(false);
         SceneManager.LoadScene(sceneName);
     }
 
     public void StartGame()
     {
-        SceneManager.LoadScene("LevelDemo");        
+        SceneManager.LoadScene("LevelDemo");
     }
 
     public void LoadSettings()
@@ -132,10 +101,10 @@ public class GameManager : SingletonPersistent<GameManager>
     }
     public void QuitGame()
     {
-        _dataStorage.SaveGameData(AudioManager.Instance.sfx.volume,AudioManager.Instance.ambientMusic.volume);
+        _dataStorage.SaveGameData(AudioManager.Instance.sfx.volume, AudioManager.Instance.ambientMusic.volume);
         Application.Quit();
     }
-    
+
     public void LoadSceneAfterDelay(string sceneName)
     {
         StartCoroutine(DelayedSceneLoad(sceneName));
@@ -147,12 +116,25 @@ public class GameManager : SingletonPersistent<GameManager>
         SceneManager.LoadScene(sceneName);
     }
 
-    
+
     public string CurrentScene()
     {
         return SceneManager.GetActiveScene().name;
     }
 
+    public void AddAndSort(PlayerScore newScore)
+    {
+        int index = playerScores.scores.FindIndex(score => score.score < newScore.score);
 
- 
+        if (index != -1) // Als er een score gevonden is die lager is dan de nieuwe score
+        {
+            playerScores.scores.Insert(index, newScore);
+        }
+        else // Anders voeg je de nieuwe score aan het einde van de lijst toe
+        {
+            playerScores.scores.Add(newScore);
+        }
+    }
+
+
 }
