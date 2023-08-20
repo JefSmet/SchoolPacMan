@@ -294,5 +294,8 @@ public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
         Accept();
     }
 
-   
+    private void OnDestroy()
+    {
+        Destroy(_hudController);
+    }
 }
