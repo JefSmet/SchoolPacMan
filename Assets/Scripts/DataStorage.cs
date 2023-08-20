@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 
+/*
+ * In the release version the saved data needs to be encrypted to prevent cheating!
+ */
+
+
 [System.Serializable]
 public class GameData
 {
@@ -74,7 +79,7 @@ public class DataStorage : MonoBehaviour
             PlayerScoreList loadedScores = JsonUtility.FromJson<PlayerScoreList>(json);
             return loadedScores;
         }
-        return null;
+        return new PlayerScoreList(new List<PlayerScore>());
 
     }
 

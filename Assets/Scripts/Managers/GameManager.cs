@@ -13,13 +13,15 @@ public class GameManager : SingletonPersistent<GameManager>
     public event Action<int> onLivesChanged;
     [SerializeField] private GameObject _arduinoControllerPrefab;
     [SerializeField] private DataStorage _dataStorage;
-
+    [SerializeField] private List<String> levels = new List<String>();
+    private int currentLevelIndex=0;
 
     private SerialCommThreaded _arduinoController;
 
     private int lives;
 
     public PlayerScoreList playerScores = new PlayerScoreList(new List<PlayerScore>());
+
     public int GameScore { get; set; }
 
     public int Lives
@@ -35,9 +37,10 @@ public class GameManager : SingletonPersistent<GameManager>
         }
     }
 
-    public void Defeat()
+    public void GameOver()
     {
-        SceneManager.LoadScene("Defeat");
+        
+        SceneManager.LoadScene("GameOver");
     }
 
     public void Victory()
@@ -82,7 +85,7 @@ public class GameManager : SingletonPersistent<GameManager>
             LoadSceneAfterDelay("MainMenu");
         }
 
-        Lives = 3;
+        
     }
 
     public void LoadScene(string sceneName)
@@ -92,7 +95,9 @@ public class GameManager : SingletonPersistent<GameManager>
 
     public void StartGame()
     {
-        SceneManager.LoadScene("LevelDemo");
+        GameScore = 0;
+        Lives = 3;
+        SceneManager.LoadScene("Level 1");
     }
 
     public void LoadSettings()
@@ -137,4 +142,40 @@ public class GameManager : SingletonPersistent<GameManager>
     }
 
 
+
+
+
+
+    public bool IsScoreInTop5(int checkScore)
+    {
+        if (playerScores.scores.Count == 0) return true;
+
+        // Als de lijst minder dan 5 items heeft, controleer dan gewoon of checkScore hoger is dan de laagste score in de lijst.
+        if (playerScores.scores.Count < 5)
+        {
+            return checkScore > playerScores.scores[playerScores.scores.Count - 1].score;
+        }
+
+        // Anders, controleer of checkScore hoger is dan de 5e score in de lijst.
+        return checkScore > playerScores.scores[4].score;
+    }
+
+    public void SaveScores()
+    {
+        _dataStorage.SaveScores(playerScores);
+    }
+
+
+    public void LoadNextLevel()
+    {
+        if (currentLevelIndex < levels.Count - 1)
+        {
+            currentLevelIndex++;
+            SceneManager.LoadScene(levels[currentLevelIndex]);
+        }
+        else
+        {
+            GameOver();
+        }
+    }
 }

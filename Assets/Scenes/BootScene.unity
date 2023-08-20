@@ -449,6 +449,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameManager (persistent)
       objectReference: {fileID: 0}
+    - target: {fileID: 5255313645735331725, guid: 62efdd4fdc8dbe346a7725b6976a31de, type: 3}
+      propertyPath: levels.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5255313645735331725, guid: 62efdd4fdc8dbe346a7725b6976a31de, type: 3}
+      propertyPath: levels.Array.data[0]
+      value: Level 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5255313645735331725, guid: 62efdd4fdc8dbe346a7725b6976a31de, type: 3}
+      propertyPath: levels.Array.data[1]
+      value: Level 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5255313645735331726, guid: 62efdd4fdc8dbe346a7725b6976a31de, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -562,8 +574,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4293984000
-  m_fontColor: {r: 0, g: 1, b: 0.94248676, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

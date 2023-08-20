@@ -31,6 +31,7 @@ Transform:
   m_Children:
   - {fileID: 3339975714257516116}
   - {fileID: 8547247388139451391}
+  - {fileID: 5869977389391290871}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -52,10 +53,9 @@ MonoBehaviour:
   superballColor: {r: 1, g: 0, b: 0, a: 1}
   percentageSuperballs: 20
   _hudControllerPrefab: {fileID: 7162136578178145379, guid: fedd0e09c3d63e24e9091de06df3ba67, type: 3}
-  sfxSlider: {fileID: 6335947441956061495}
-  musicSlider: {fileID: 6335947443075154396}
   _pauseMenu: {fileID: 2452781765374998549}
   _settingsMenu: {fileID: 6515888120489809728}
+  _sliderActions: {fileID: 5869977389391290870}
   fpc: {fileID: 0}
 --- !u!1 &5261194893299813184
 GameObject:
@@ -300,8 +300,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SettingsManager, Assembly-CSharp
+      - m_Target: {fileID: 5869977389391290870}
+        m_TargetAssemblyTypeName: SliderActions, Assembly-CSharp
         m_MethodName: SetSfxVolume
         m_Mode: 0
         m_Arguments:
@@ -1162,8 +1162,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SettingsManager, Assembly-CSharp
+      - m_Target: {fileID: 3566834031231301881}
+        m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
         m_MethodName: Cancel
         m_Mode: 1
         m_Arguments:
@@ -1734,8 +1734,8 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SettingsManager, Assembly-CSharp
+      - m_Target: {fileID: 5869977389391290870}
+        m_TargetAssemblyTypeName: SliderActions, Assembly-CSharp
         m_MethodName: SetMusicVolume
         m_Mode: 0
         m_Arguments:
@@ -1980,8 +1980,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: SettingsManager, Assembly-CSharp
+      - m_Target: {fileID: 3566834031231301881}
+        m_TargetAssemblyTypeName: LevelManager, Assembly-CSharp
         m_MethodName: Accept
         m_Mode: 1
         m_Arguments:
@@ -2270,4 +2270,85 @@ GameObject:
 Transform:
   m_CorrespondingSourceObject: {fileID: 4372355551069370377, guid: 30217ed7167ec754d8eb05c1f6046b54, type: 3}
   m_PrefabInstance: {fileID: 1365786966145257053}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &4371653806722784038
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 3566834031231301882}
+    m_Modifications:
+    - target: {fileID: 7916592212615117520, guid: 4891c007ed0e8604b82969cfe4843a42, type: 3}
+      propertyPath: sfxSlider
+      value: 
+      objectReference: {fileID: 6335947441956061495}
+    - target: {fileID: 7916592212615117520, guid: 4891c007ed0e8604b82969cfe4843a42, type: 3}
+      propertyPath: musicSlider
+      value: 
+      objectReference: {fileID: 6335947443075154396}
+    - target: {fileID: 7916592212615117521, guid: 4891c007ed0e8604b82969cfe4843a42, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7916592212615117521, guid: 4891c007ed0e8604b82969cfe4843a42, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 548.3463
+      objectReference: {fileID: 0}
+    - target: {fileID: 7916592212615117521, guid: 4891c007ed0e8604b82969cfe4843a42, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 244.69963
+      objectReference: {fileID: 0}
+    - target: {fileID: 7916592212615117521, guid: 4891c007ed0e8604b82969cfe4843a42, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 15.553696
+      objectReference: {fileID: 0}
+    - target: {fileID: 7916592212615117521, guid: 4891c007ed0e8604b82969cfe4843a42, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7916592212615117521, guid: 4891c007ed0e8604b82969cfe4843a42, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7916592212615117521, guid: 4891c007ed0e8604b82969cfe4843a42, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7916592212615117521, guid: 4891c007ed0e8604b82969cfe4843a42, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7916592212615117521, guid: 4891c007ed0e8604b82969cfe4843a42, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7916592212615117521, guid: 4891c007ed0e8604b82969cfe4843a42, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7916592212615117521, guid: 4891c007ed0e8604b82969cfe4843a42, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7916592212615117523, guid: 4891c007ed0e8604b82969cfe4843a42, type: 3}
+      propertyPath: m_Name
+      value: SliderActions
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 4891c007ed0e8604b82969cfe4843a42, type: 3}
+--- !u!114 &5869977389391290870 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7916592212615117520, guid: 4891c007ed0e8604b82969cfe4843a42, type: 3}
+  m_PrefabInstance: {fileID: 4371653806722784038}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f860348e1e193b642a05613490864a7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &5869977389391290871 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7916592212615117521, guid: 4891c007ed0e8604b82969cfe4843a42, type: 3}
+  m_PrefabInstance: {fileID: 4371653806722784038}
   m_PrefabAsset: {fileID: 0}

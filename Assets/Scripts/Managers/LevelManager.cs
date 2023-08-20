@@ -31,6 +31,7 @@ public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
     private float startMusicValue;
     [SerializeField] private GameObject _pauseMenu;
     [SerializeField] private GameObject _settingsMenu;
+    [SerializeField] private SliderActions _sliderActions;
 
     public FirstPersonController fpc;
     public List<GameObject> PatrolPoints { get { return patrolpoints; } }
@@ -99,7 +100,7 @@ public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
         }
         else
         {
-            GameManager.Instance.Defeat();
+            GameManager.Instance.GameOver();
         }
 
     }
@@ -150,7 +151,7 @@ public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
         GameManager.Instance.ArduinoController.Blink(GetStudiepuntLight(sp));
         if (GetActiveStudiepunten() == 0)
         {
-            GameManager.Instance.LoadScene("NextLevel");
+            GameManager.Instance.LoadNextLevel();
         }
     }
 
@@ -233,6 +234,7 @@ public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
     public void ShowSettings()
     {
         HidePauseMenu();
+        _sliderActions.UpdateSliders();
         _settingsMenu.SetActive(true);
     }
 
@@ -281,7 +283,8 @@ public class LevelManager : QuestMan.Singleton.Singleton<LevelManager>
 
     public void Accept()
     {
-
+        startSfxValue=AudioManager.Instance.sfx.volume;
+        startMusicValue=AudioManager.Instance.ambientMusic.volume;
         HideSettings();
         ShowPauseMenu();
 

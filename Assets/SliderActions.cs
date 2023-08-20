@@ -13,10 +13,9 @@ public class SliderActions : MonoBehaviour
     {
 
         
-        startSfxValue = AudioManager.Instance.sfx.volume;
-        startMusicValue = AudioManager.Instance.ambientMusic.volume;
-        sfxSlider.value = startSfxValue;
-        musicSlider.value = startMusicValue;
+        
+        UpdateSliders();
+        
     }
     public void SetSfxVolume(float value)
     {
@@ -32,5 +31,13 @@ public class SliderActions : MonoBehaviour
         AudioManager.Instance.sfx.volume = startSfxValue;
         AudioManager.Instance.ambientMusic.volume = startMusicValue;
         GameManager.Instance.LoadScene("MainMenu");
+    }
+
+    public void UpdateSliders()
+    {
+        startSfxValue = AudioManager.Instance.sfx.volume;
+        startMusicValue = AudioManager.Instance.ambientMusic.volume;
+        sfxSlider.value = startSfxValue;
+        musicSlider.value = startMusicValue;
     }
 }
