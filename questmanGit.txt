@@ -1,0 +1,194 @@
+* 07912b3 (HEAD -> main, origin/main, origin/HEAD, origin/CodeCleanup, CodeCleanup) Cleanup 2
+* 0acc510 Fixed gamemanager not getting destroyed
+* b2e45a8 cleanup 1
+* 5e32c55 (origin/UI, UI) added main menu button at defeat and next level scene
+* 81dba29 Last UI elements and behaviour change of Santa
+* bfd46a9 created pause menu
+* 7fb0454 Links between bootscreen and bugfixes
+* 2185491 implemented startscreen and settings
+* 41e783e added scenery
+* 6bf8e48 updated visibility
+| * 51d9dfe (refs/stash) On main: !!GitHub_Desktop<main>
+|/| 
+| * 38d18a1 index on main: 463ad8d Update ProjectSettings.asset
+|/  
+* 463ad8d Update ProjectSettings.asset
+* 106e8bf added screenshot of github tree
+* 0a8de68 (origin/Audio, Audio) removed unused assets and update audio attack
+* 91b82e1 Added footstep script
+*   40244da Merge branch 'main' into Audio
+|\  
+| * 9a3b816 Buzzer now plays a sound when a ball is picked up
+* | a40f76f Added more assets and added audiosource to manager
+|/  
+* 9a25b06 (origin/Behaviors, Behaviors) finilised behaviours
+* 00cda3b fixed the raycast not hitting correctly for doctor
+* e24c93e implemented santa and doctor
+* 341de8e player respawn bug fix
+* b676737 created navmesh obstacles and fixed collliders
+* 7efc899 (origin/Cleanup-unused) further cleanup
+* 1022fc5 Revert "Merge branch 'Behaviors' into Cleanup-unused"
+* 1f3a17c further cleanup
+*   051bfe9 Merge branch 'Behaviors' into Cleanup-unused
+|\  
+| *   405c015 Merge branch 'Behaviors' of https://github.com/JefSmet/SchoolPacMan into Behaviors
+| |\  
+| | * 3205f69 can jump again
+* | | 1f2a303 initial
+|/ /  
+* / d2a1b37 removed adobe substance plugin
+|/  
+*   850e559 Merge branch 'AIBehavior' into Behaviors
+|\  
+| * 4d69d62 Update LevelDemo.unity
+| * 3f8921f adobe update
+| * b3264d0 adobe substance update
+| * e8f04d9 more behaviors
+| * 2f5c1df Added AI behavior
+* | d2127f9 removed unused assets
+* | 5a45fea adobe update
+|/  
+* 6bcbe9b adjusted radius and height character controller
+* a9ba078 update pull after start
+* fb1d94a Delete Arduino ino files directory
+| * 9260763 (origin/VR, VR) updated start method
+| * b614e67 updated build errors
+| * c4d18be update
+| * 1e41d4b cleanup
+| * 6cfbf86 removed sound updated scene
+| * fdf3899 Cleanup
+| * 9af858e material and velocity scale now change on color switch
+| * 5b10e54 added more balls to scene
+| * c91a732 the throwing of the balls is improved
+| * aa4b0ae switched to android
+| * 142430b placed some trees
+| * a0ea4e4 trees
+| * 2efc864 added skybox and added application control
+| * 4bba172 scene update
+| * cef15fe bots respawn on collision with studiepunt
+| * b59e6b4 throwable studiepunten
+| * 42a90ca added snap turning and teleporting
+| * e217b80 added vr assets
+| * 7abb4b6 teleportation skeleton setup
+| *   f5a46aa Merge branch 'main' into VR
+| |\  
+| |/  
+|/|   
+* | c51651e Added new Arduino-script
+* | cd1094b Update LevelDemo.unity
+| * c639f7c teleportation in main scene
+| * b975c20 initialized vr and tested hand movement
+|/  
+* 0a2cd8d update
+* 6432ff7 Update README.md
+* a54b12e (origin/HUDController) Added icons to HUD
+*   634361c Merge branch 'HUDController' of https://github.com/JefSmet/SchoolPacMan into HUDController
+|\  
+| * 21c3bb1 fixed playerspawn again
+* | ecbaaa3 added textures
+|/  
+* a482d59 fixed player spawner
+*   35a88d9 Merge branch 'main' into HUDController
+|\  
+| * 6ebc9f6 cleanup
+* | 69ca67b Merge branch 'main' into HUDController
+|\| 
+| * c40a1b3 removed radius
+| * b7417d6 (origin/Ai-Attack) On attack the player loses a life and every humanoid respawns
+| * fc278e3 (origin/sceneloading) humanoids now spawn at correct locations
+| * 0825c43 lives are now visible and implemented
+| * 7ee6736 (origin/Arduino) implemented runaway state FSM
+| * f0c2258 cleanup
+| * 13a4607 Observer for FPC and Singleton threadsafe
+| * fde65c0 Added events
+| * 828755a (origin/Balls) Superballs implemented
+| * 4a3e668 Added 2 Input/Ouput script to repo
+* | 4f3f03f added pictures removed debug.log
+| | * 7530528 (origin/Terrain) installed adobe plugin for importing .sbsar materials/textures
+| |/  
+| * 5403ab8 observerpattern generic implementation
+| * 94e0300 Hierarchy update
+| * eb25e13 Update Hierarchy-structure
+| * f38e338 implemented Observer-pattern for PotValue
+| * 8897177 improvements DrawBalls-Prefab
+| * c47db4a Add BallSpawner
+| * 30d0b4c spawn balls between 2 points
+| * 6db6e2b Update State.cs
+| * 4d23138 enemies can now not see through walls
+| * ee316f1 random patrol point
+| * 76f3409 bugfix
+| *   d337c86 Merge branch 'main' of https://github.com/JefSmet/SchoolPacMan
+| |\  
+| | * e18d808 pot meter defines the speed of player
+| * | d4e1e7a fixed jump psitions and made movement more performant
+| * | 37365c0 pot meter defines the speed of player
+| |/  
+| * 92b2c52 led blink on studiepunt pickup
+| * 5468ee8 added properties
+| * c374910 added arduinoController to gameManager
+| * 01ef8ea put arduino controller prefab onto gamemanager
+| * 11350b9 added blink
+| * ef152f8 removed rigidbody of tables and chairs
+| *   9798e63 Merge branch 'HUDController'
+| |\  
+| |/  
+|/|   
+* | 0fb337e bugfix
+* | e8a7b4d Remaining sutdiepunten fixed
+* | f3d6565 Update SampleScene.unity
+* | 68d1f84 cleanup
+| * 09e36a5 made prefab
+| * ce9f613 Update SerialCommThreaded.cs
+| * 33c0d1c created methods for led light and property for speed
+| * fe5f966 Parsed potentiometer data to int
+| * 6def462 Update SerialCommThreaded.cs
+| * 4f0d552 established connection between arduino and unity
+| *   7de9600 Merge remote-tracking branch 'origin/HUDController'
+| |\  
+| |/  
+|/|   
+* | 2aad4df Subject.cs
+* | 920c413 added reference to Observer en Subject cs
+* | 51f331c Gamemanager hudcontroller
+| * df67ed6 added studiepunten
+| * fd0c166 cleaned up scene
+|/  
+* 7703e4b (origin/Ai-jump) added more jumpable objects
+* 27c51fc fixed pingpong table
+*   d5ab585 Merge branch 'Ai-jump' of https://github.com/JefSmet/SchoolPacMan into Ai-jump
+|\  
+| * a637905 PingPong_Mario
+* | d7aea76 added more ai and tweaked speed
+|/  
+* 28a343b table with offmeshlinks
+* 5c3c476 Added agent link mover script
+* 39601f3 Test Jump scene
+* e85c4dd CORRECTION Easy Primitive PeopleBaseCharacter-orientation
+* d898f56 Easy Primitive People Prefabs corrections
+* 2ce4bb6 Update Patrol.cs
+* e89ea01 patrol to nearest checkpoint
+* 513b57a scene update
+* 172ff11 State finishing
+* df12e6d updated cop capsule position
+* 646cdc4 deleted stupid github plugin
+* 5712d9d finished patrol state
+* ed85a86 rescale
+* 54c62b6 added states and materials
+* 359e0f6 (origin/testing) updated unity version
+* dac3d26 rescaled
+* 939e20c upgraded to urp
+* d4c7fd6 Update SampleScene.unity
+* 212cdda added assets
+* 25db470 added some audio assets
+* a858bd8 made some prefabs
+* be637fe Made some singletons
+* b818d96 singleton
+* 97d1fc2 added health
+* b127cba added first person controller
+*   fbee946 Merge branch 'main' of https://github.com/JefSmet/SchoolPacMan
+|\  
+| * a5b0cd2 Update README.md
+* | 8d77fac added navmesh and some props
+* | 3cfcc29 school props
+|/  
+* 8ce445a Initial commit

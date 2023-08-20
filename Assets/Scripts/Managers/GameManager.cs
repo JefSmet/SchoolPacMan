@@ -117,7 +117,7 @@ public class GameManager : SingletonPersistent<GameManager>
 
     IEnumerator DelayedSceneLoad(string sceneName)
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
         SceneManager.LoadScene(sceneName);
     }
 
@@ -148,12 +148,10 @@ public class GameManager : SingletonPersistent<GameManager>
 
     public bool IsScoreInTop5(int checkScore)
     {
-        if (playerScores.scores.Count == 0) return true;
-
-        // Als de lijst minder dan 5 items heeft, controleer dan gewoon of checkScore hoger is dan de laagste score in de lijst.
+        
         if (playerScores.scores.Count < 5)
         {
-            return checkScore > playerScores.scores[playerScores.scores.Count - 1].score;
+            return true;
         }
 
         // Anders, controleer of checkScore hoger is dan de 5e score in de lijst.
